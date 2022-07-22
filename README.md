@@ -15,26 +15,26 @@ Core features or functionalities
 -Music & sound 
 
 Other Aspects:
-{ A lobby animation screen }
-{ Character select screen with character combonation tables }
-{ Music selection with queue }
-{ Production Readme }
+{ A lobby animation screen }<br />
+{ Character select screen with character combonation tables }<br />
+{ Music selection with queue }<br />
+{ Production Readme }<br />
 
 Wireframes:
 
 ![Hot Nets Home Page](wireframes/browser_page.png)
-
+<br />
 ![Hot Nets Home Page](wireframes/select_menu.png)
-
+<br />
 ![Hot Nets Home Page](wireframes/game.png)
-
+<br />
 Implementation Timeline:
-Friday Afternoon - project setup
-Weekend - create player and bots, move characters with event listeners
-Monday - attacks & combos, gametimer,  
-Tuesday - game menu
-Wednesday - sprite implementation
-Thursday Morning - sprite implementation
+Friday Afternoon - project setup<br />
+Weekend - create player and bots, move characters with event listeners<br />
+Monday - attacks & combos, gametimer,  <br />
+Tuesday - game menu<br />
+Wednesday - sprite implementation<br />
+Thursday Morning - sprite implementation<br />
 
 
 
