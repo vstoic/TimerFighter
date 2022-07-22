@@ -1,7 +1,7 @@
 ## Background: <br />
 TimerFighter is a arcade fighting game where you have to defeat as many bots
 within an selected time. The bots will only defend againtst players. With each victory bot defence intuition will increase.
-Each character has different styles of play and sets of moves. It will be up to the player to become proficient and smash the timer.
+Each character has different styles of play and sets of moves. It will be up to the player to become proficient and smash the timer. :stopwatch: :boxing_glove: 
 
 
 ## Core features & functionalities <br />
@@ -12,7 +12,7 @@ Each character has different styles of play and sets of moves. It will be up to 
 -A detailed character combo list <br />
 -Music & sound <br />
 
-###### Other Aspects: <br />
+## Other Aspects: <br />
 { A lobby animation screen } <br />
 { Character select screen with character combonation tables } <br />
 { Music selection with queue } <br />
@@ -28,7 +28,7 @@ Each character has different styles of play and sets of moves. It will be up to 
 <br />
 
 
-###### Implementation Timeline:
+## Implementation Timeline:
 Friday Afternoon - project setup <br />
 Weekend - create player and bots, move characters with event listeners <br />
 Monday - attacks & combos, gametimer,  <br />
