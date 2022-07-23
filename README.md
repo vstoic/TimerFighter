@@ -1,10 +1,9 @@
-Background:
-
-TimerFighter is a arcade fighting game where you have to defeat as many bots
+## Background:
+TimerFighter is a arcade fighting game where you have to defeat as many bots  
 within an selected time. The bots will only defend againtst player and the defence level of bot will increase with each victory.
 Each characters have different styles of play and sets of moves. It will be up to the player to become proficient and smash the timer.
 
-Functionality & MVPs:
+## Functionality & MVPs:
 
 Core features or functionalities
 -Has many unique characters, each with their own attack combinations
@@ -14,13 +13,13 @@ Core features or functionalities
 -A detailed character combo list 
 -Music & sound 
 
-Other Aspects:
+## Other Aspects:
 { A lobby animation screen }
 { Character select screen with character combonation tables }
 { Music selection with queue }
 { Production Readme }
 
-Wireframes:
+## Wireframes:
 
 ![Hot Nets Home Page](wireframes/browser_page.png)
 
@@ -28,7 +27,7 @@ Wireframes:
 
 ![Hot Nets Home Page](wireframes/game.png)
 
-Implementation Timeline:
+## Implementation Timeline:
 Friday Afternoon - project setup
 Weekend - create player and bots, move characters with event listeners
 Monday - attacks & combos, gametimer,  
