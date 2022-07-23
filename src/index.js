@@ -1,6 +1,12 @@
 
-const canvas = document.querySelector('canvas')
+document.addEventListener('DOMContentLoaded', () => {
+
+// const canvas = document.querySelector('canvas')
+const canvas = document.getElementById('timer-fighter');
+console.log(canvas)
 const c = canvas.getContext('2d')
+
+// new Sprite(canvas);
 
 //setting canvas on weidth and height to 1024/576
 canvas.width = 1024
@@ -12,28 +18,55 @@ c.fillRect(0, 0, canvas.width, canvas.height)
 
 
 // added a const gravity for the game 
-const gravity  = 0.6
+const gravity  = 0.7
 // using for object oriented programing to create a sprite class that will take a position, when called on. 
 //velocity and position are wrapped together because you cant through velocity first and cant put position second.
 // within the draw method we are taking arguments built in the new sprite and filling it with given arguements.
-//lastkey for each player
+//lastkey movement for each player
+//added an attackbox for the character
+//added an is attacking value for each player
 
 class Sprite {
-    constructor({ position, velocity }) {
+    constructor({ position, velocity, color = "orange", offset}) {
         this.position = position
         this.velocity = velocity
+        this.color = color
+        this.width = 50
         this.height = 125
         this.lastKey
+        this.attackBox = {
+            position: {
+                x: this.position.x,
+                y: this.position.y
+            },
+            offset,
+            width: 100,
+            height: 50
+        }
+        this.isAttacking
+        this.health = 100
     }
     
     draw() {
-        c.fillStyle = "orange"
+        //characters animation
+        c.fillStyle = this.color
         c.fillRect(this.position.x, this.position.y, 50, this.height)
-    }
+
+        //attackbox animation
+        //if statement allows draw to only show when isAttacking is true 
+       
+        if (this.isAttacking){
+        c.fillStyle = "red"
+        c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
+    }}
     
     //the update method adds the drop speed(gravity) to y for each time the frame is loaded through draw
     update() {
         this.draw()
+        //sets the position of the x box to the characters position 
+        this.attackBox.position.x = this.position.x + this.attackBox.offset.x
+        this.attackBox.position.y = this.position.y
+
         this.position.y += this.velocity.y
         this.position.x += this.velocity.x
         //if the top of the character is at the bottom of the board then set drop to 0
@@ -42,7 +75,15 @@ class Sprite {
             this.velocity.y = 0
         } else this.velocity.y += gravity
     }
+    // when invoked attacking is character/bots isAttacking value set to true for 100ms then changed back to false
+    attack() {
+        this.isAttacking = true 
+        setTimeout (() => {
+            this.isAttacking = false
+        }, 100)
+    }
 }
+
 
 
 //when a player is being invoked it createss a new sprite of a player with x, y set.
@@ -55,10 +96,13 @@ const player = new Sprite({
     velocity: {
         x: 0,
         y: 0
+    },
+    offset: {
+        x: 0,
+        y: 0
     }
-
+    
 })
-
 
 const enemy = new Sprite({
     position: {
@@ -68,11 +112,16 @@ const enemy = new Sprite({
     velocity: {
         x: 0,
         y: 0
+    },
+    color: "blue",
+    offset: {
+        x: -50,
+        y: 0
     }
-
 })
 
-
+//these are the keys for the players / bots
+//stops movement if false
 const keys = {
     a: {
         pressed: false
@@ -82,12 +131,33 @@ const keys = {
     },
     w: {
         pressed: false
+    },
+    ArrowRight: {
+        pressed: false
+    },
+    ArrowLeft: {
+        pressed: false
+    },
+    ArrowUp: {
+        pressed: false
     }
+    
 }
 
 
 
-let lastKey
+// collision for attackboxes and enemy
+//if the players x to width position is past enemys position and vise versa &&
+// players y to height is with in enemys height and vise versa 
+function rectangleCollision({rectangle1, rectangle2}) {
+    return (
+        rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x &&
+        rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width &&
+        rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y &&
+        rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height 
+    )
+}
+
 //creating a constant loop where we request the window to have a animation 
 //by taking in the argument of itself
 //updates the canvas with a fillrect after each loop and setting it to black 
@@ -100,21 +170,43 @@ function animate() {
     enemy.update()
 
     player.velocity.x = 0
+    enemy.velocity.x = 0
 
 
-    //player movement
-    if (keys.a.pressed && lastKey === 'a') {
-        player.velocity.x = -1
-    } else if (keys.d.pressed && lastKey === 'd') {
-        player.velocity.x = 1 
+    //player movement 
+    //if last key is pressed then player will move in that direction by altering velocity
+    if (keys.a.pressed && player.lastKey === 'a') {
+        player.velocity.x = -7
+    } else if (keys.d.pressed && player.lastKey === 'd') {
+        player.velocity.x = 7 
     } 
 
-    //enemy movement
+    //enemy movement same as players
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
-        enemy.velocity.x = -1
+        enemy.velocity.x = -7
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
-        enemy.velocity.x = 1
+        enemy.velocity.x = 7
     } 
+
+    //collision detect
+    // if rectanglecollision is true and is attacking is true
+    if (rectangleCollision({
+        rectangle1: player,
+        rectangle2: enemy
+        }) && player.isAttacking) {
+        player.isAttacking = false    
+        enemy.health -= 2
+        document.querySelector('#enemy-health').style.width = enemy.health + '%'
+        console.log('player attack successful');
+    }
+
+    if (rectangleCollision({ 
+        rectangle1: enemy,
+        rectangle2: player 
+        }) && enemy.isAttacking) {
+        enemy.isAttacking = false
+        console.log('enemy attack successful');
+    }
 }
 
 animate()
@@ -123,15 +215,20 @@ window.addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'd':
             keys.d.pressed = true
-            lastKey = 'd'
+            player.lastKey = 'd'
             break
         case 'a':
             keys.a.pressed = true
-            lastKey = 'a'
+            player.lastKey = 'a'
             break
         case 'w':
-            player.velocity.y = -20
+            player.velocity.y = -25
             break
+        case ',':
+            player.attack()
+            break
+
+ 
 
 
         case 'ArrowRight':
@@ -143,10 +240,13 @@ window.addEventListener('keydown', (event) => {
             enemy.lastKey = 'ArrowLeft'
             break
         case 'ArrowUp':
-            enemy.velocity.y = -20
+            enemy.velocity.y = -25
+            break
+        case 'ArrowDown':
+            enemy.attack()
             break
     }
- console.log(event.key)
+// console.log(event.key)
 })
 
 window.addEventListener('keyup', (event) => {
@@ -174,6 +274,8 @@ window.addEventListener('keyup', (event) => {
             keys.ArrowUp.pressed = false
             break
     }
-    console.log(event.key)
+//    console.log(event.key)
 })
 
+
+})
