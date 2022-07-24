@@ -18,7 +18,8 @@ c.fillRect(0, 0, canvas.width, canvas.height)
 
 
 // added a const gravity for the game 
-const gravity  = 0.7
+const gravity  = 1.3
+
 // using for object oriented programing to create a sprite class that will take a position, when called on. 
 //velocity and position are wrapped together because you cant through velocity first and cant put position second.
 // within the draw method we are taking arguments built in the new sprite and filling it with given arguements.
@@ -158,6 +159,38 @@ function rectangleCollision({rectangle1, rectangle2}) {
     )
 }
 
+// has there if statements for what end game displays. 
+// resets the html id of displayTie display from hidden to flex and changes the innerHTML content
+// stops the timeout timer
+function determineWinner({player, enemy, timerId}) {
+    clearTimeout(timerId)
+    document.querySelector('#displayTie').style.display = 'flex'
+    if (player.health === enemy.health) {
+        document.querySelector('#displayTie').innerHTML = 'Tie'
+    } else if (player.health > enemy.health) {
+        document.querySelector('#displayTie').innerHTML = 'Player 1 Wins!'
+    } else if (player.health < enemy.health) {
+        document.querySelector('#displayTie').innerHTML = 'Player 2 Wins!'
+    }
+}
+
+// this is the clock function that sets and counts down the clock
+let timer = 99
+let timerId
+function decreaseTimer() {
+    if (timer > 0) {
+        timerId = setTimeout(decreaseTimer, 1000)
+        timer--
+        document.querySelector('#timer').innerHTML = timer
+    }
+    if (timer === 0) {
+        determineWinner({player, enemy, timerId})
+    }
+}
+
+decreaseTimer()
+
+
 //creating a constant loop where we request the window to have a animation 
 //by taking in the argument of itself
 //updates the canvas with a fillrect after each loop and setting it to black 
@@ -195,7 +228,7 @@ function animate() {
         rectangle2: enemy
         }) && player.isAttacking) {
         player.isAttacking = false    
-        enemy.health -= 2
+        enemy.health -= 10
         document.querySelector('#enemy-health').style.width = enemy.health + '%'
         console.log('player attack successful');
     }
@@ -205,7 +238,14 @@ function animate() {
         rectangle2: player 
         }) && enemy.isAttacking) {
         enemy.isAttacking = false
+        player.health -= 10
+        document.querySelector('#player-health').style.width = player.health + '%'
         console.log('enemy attack successful');
+    }
+
+    //end game by health
+    if (player.health <= 0 || enemy.health <= 0) {
+        determineWinner({player, enemy, timerId})
     }
 }
 
