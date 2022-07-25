@@ -20,20 +20,86 @@ c.fillRect(0, 0, canvas.width, canvas.height)
 // added a const gravity for the game 
 const gravity  = 1.3
 
+
+
+// this is the class for sprite images, takes in position and assigns image and 
+//sorce of the image. dats the image using a built in canvas method(drawImage)
+//also invokes the draw() function 
+// frames elapsed is for how many frames the game is going through
+//frames hold is how many frames elapsed until you loop the current frame
+
+class Sprite {
+    constructor({position, imageSrc, scale = 1, framesMax = 1, offset = {x: 0, y: 0} }) {
+        this.position = position
+        this.width = 50
+        this.height = 125
+        this.image = new Image()
+        this.image.src = imageSrc 
+        this.scale = scale
+        this.framesMax = framesMax
+        this.framesCurrent = 0
+        this.framesElapsed = 0
+        this.framesHold = 150
+
+        //offset to recenter sprite
+        this.offset = offset
+    }
+    // takes in image, and splits the image into the max number of frames then multiply
+    //it by the number of frames. then scales the image
+
+    draw() {
+        c.drawImage(
+            this.image,
+            this.framesCurrent * (this.image.width / this.framesMax),
+            0,
+            this.image.width / this.framesMax,
+            this.image.height,
+            this.position.x - this.offset.x,
+            this.position.y - this.offset.y,
+            (this.image.width / this.framesMax) * this.scale,
+            this.image.height * this.scale
+            )
+        
+    }
+    //to the current frame. 
+    // if the frames is less than the max frame then add one. 
+    //if it is at max frames then loop back to the start.
+    animateFrames() {
+        this.framesElapsed++
+        if (this.framesElapsed % this.framesHold === 0) {
+            if (this.framesCurrent < this.framesMax - 1) {
+                this.framesCurrent++
+            } else {
+                this.framesCurrent = 0
+            }
+        }
+    }
+
+    //draws the script and adds a frame 
+    update() {
+        this.draw()
+        this.animateFrames()
+    }
+}
+
+
+
+
 // using for object oriented programing to create a sprite class that will take a position, when called on. 
 //velocity and position are wrapped together because you cant through velocity first and cant put position second.
 // within the draw method we are taking arguments built in the new sprite and filling it with given arguements.
 //lastkey movement for each player
 //added an attackbox for the character
 //added an is attacking value for each player
-
-class Sprite {
-    constructor({ position, velocity, color = "orange", offset}) {
-        this.position = position
+//extends takes functions from sprite
+//in super you select inheritance from parent properties
+class Fighter extends Sprite{
+    constructor({ position, velocity, color = "white", imageSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 } }) {
+        super({position, imageSrc, scale, framesMax, offset})
         this.velocity = velocity
         this.color = color
         this.width = 50
-        this.height = 125
+        this.height = 65
         this.lastKey
         this.attackBox = {
             position: {
@@ -41,29 +107,27 @@ class Sprite {
                 y: this.position.y
             },
             offset,
-            width: 100,
-            height: 50
+            width: 65,
+            height: 25
         }
         this.isAttacking
         this.health = 100
+        //same as in spriteclass but we dont want to overkill and put in into constructor argument
+        this.framesCurrent = 0
+        this.framesElapsed = 0
+        this.framesHold = 10
+        
+
+
+
     }
     
-    draw() {
-        //characters animation
-        c.fillStyle = this.color
-        c.fillRect(this.position.x, this.position.y, 50, this.height)
-
-        //attackbox animation
-        //if statement allows draw to only show when isAttacking is true 
-       
-        if (this.isAttacking){
-        c.fillStyle = "red"
-        c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-    }}
+    
     
     //the update method adds the drop speed(gravity) to y for each time the frame is loaded through draw
     update() {
         this.draw()
+        this.animateFrames()
         //sets the position of the x box to the characters position 
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
         this.attackBox.position.y = this.position.y
@@ -72,7 +136,8 @@ class Sprite {
         this.position.x += this.velocity.x
         //if the top of the character is at the bottom of the board then set drop to 0
         //else keep dropping
-        if (this.position.y + this.height + this.velocity.y >= canvas.height) {
+        // -18 from the bottom of the canvas so its not leveled on the border of canvas
+        if (this.position.y + this.height + this.velocity.y >= canvas.height -18) {
             this.velocity.y = 0
         } else this.velocity.y += gravity
     }
@@ -86,13 +151,33 @@ class Sprite {
 }
 
 
+const background = new Sprite({
+    position: {
+        x: 0,
+        y: 0
+    },
+    imageSrc: 'src/assets/village_2 copy.png'
+})
+
+const house = new Sprite({
+    position: {
+        x: 351,
+        y: 111
+    },
+    imageSrc: 'src/assets/spritesheet.png',
+    scale: 1.032,
+    framesMax: 3
+})
+
+
 
 //when a player is being invoked it createss a new sprite of a player with x, y set.
 //player has x,y velocity of 0,
-const player = new Sprite({
+//offset is for the attackbox and which way it faces
+const player = new Fighter({
     position: {
-        x: 0,
-        y: 0
+        x: 50,
+        y: 400
     },
     velocity: {
         x: 0,
@@ -101,24 +186,34 @@ const player = new Sprite({
     offset: {
         x: 0,
         y: 0
+    },
+    imageSrc: 'src/assets/Krillin/idle.png',
+    scale: 0.75,
+    framesMax: 4,
+    offset: {
+        x: 0,
+        y: 0
     }
-    
-})
+}
+)
 
-const enemy = new Sprite({
+const enemy = new Fighter({
     position: {
-        x: 400,
-        y: 100
+        x: 924,
+        y: 400
     },
     velocity: {
         x: 0,
         y: 0
     },
-    color: "blue",
+    color: "white",
     offset: {
         x: -50,
         y: 0
-    }
+    },
+    imageSrc: 'src/assets/Krillin/1.png',
+    scale: 1.1,
+    framesMax: 1
 })
 
 //these are the keys for the players / bots
@@ -175,7 +270,7 @@ function determineWinner({player, enemy, timerId}) {
 }
 
 // this is the clock function that sets and counts down the clock
-let timer = 99
+let timer = 15
 let timerId
 function decreaseTimer() {
     if (timer > 0) {
@@ -199,6 +294,8 @@ function animate() {
     window.requestAnimationFrame(animate)
     c.fillStyle = "black"
     c.fillRect(0, 0, canvas.width, canvas.height)
+    background.update()
+    house.update()
     player.update()
     enemy.update()
 

@@ -5,36 +5,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="src/styles/reset.css" />
+    <link rel="stylesheet" href="src/styles/reset.scss" />
     <link rel="stylesheet" href="./dist/main.css" />
-    <script src="src/index.js"></script>
-    <title>Project Name</title>
-
+    <script src="dist/main.js"></script>
+    <title>Timer Fighter</title>
 </head>
 
 
 <body>
-    <!-- NEED TO MOVE ALL THIS INTO A CSS FILE -->
+    <!-- NEED TO MOVE ALL THIS INTO A SCSS FILE -->
     <!-- red container div -->
-    <div style="position: relative; display: inline-block;">
+    <div id="mainContainer" style="position: relative; display: inline-block;">
         <!-- smaller red container div -->
-        <div style="position: absolute; display: flex; width: 100%; align-items: center; padding:0 px;">
+        <div id="smallContainer" style="position: absolute; display: flex; width: 100%; align-items: center; padding:0 px;">
             <!-- player health -->
-            <div style=" position: relative; height: 30px; width: 100%; display: flex; justify-content: flex-end;">
-                <div style="background-color: black; height: 30px; width: 100%;"></div>
-                <div id="player-health"; style="position: absolute; background: white; top: 0; right: 0; bottom: 0; width: 100%;"></div>
+            <div id="playerHealth" style=" position: relative; height: 20px; width: 100%; display: flex; justify-content: flex-end;">
+                <div style="background-color: limegreen; height: 20px; width: 100%;"></div>
+                <div id="player-health"; style="position: absolute; background: blue; top: 0; right: 0; bottom: 0; width: 100%;"></div>
             </div>
             <!-- timer -->
-            <div id="timer" style="background-color: white; width: 50px; height: 50px; flex-shrink: 0;display: flex; align-items: center; justify-content: center;">10</div>
+            <div id="timer" style="background-color: orange; width: 50px; height: 50px; flex-shrink: 0;display: flex; align-items: center; justify-content: center; font-size: 25px; font-family: Arial, Helvetica, sans-serif;">10</div>
             <!-- enemy health -->
-            <div style=" position: relative; height: 30px; width: 100%;">  
-                <div style="background-color: black; height: 30px;"></div>
-                <div id="enemy-health"; style="position: absolute; background: white; top: 0; right: 0; bottom: 0; left: 0;"></div>
+            <div id="enemyHealth" style=" position: relative; height: 20px; width: 100%;">  
+                <div style="background-color: limegreen; height: 20px;"></div>
+                <div id="enemy-health"; style="position: absolute; background: red; top: 0; right: 0; bottom: 0; left: 0;"></div>
             </div>
         </div>
         <!-- tie -->
-        <div id="displayTie" style="position: absolute; color: white; align-items: center; justify-content: center; top: 0; right: 0; bottom: 0; left: 0; display: none;">Tie</div>
-        <!-- NEED TO MOVE ALL THIS INTO A CSS FILE -->
+        <div id="displayTie" style="position: absolute; color: white; align-items: center; justify-content: center; top: 0; right: 0; bottom: 0; left: 0; display: none; font-size: 40px; font-family: Arial, Helvetica, sans-serif;text-shadow:
+        0.07em 0 black,
+        0 0.07em black,
+        -0.07em 0 black,
+        0 -0.07em black; ">Tie</div>
+        <!-- NEED TO MOVE ALL THIS INTO A SCSS FILE -->
         <canvas id="timer-fighter" height="1024" width="576"></canvas>
     </div>
 </body>
