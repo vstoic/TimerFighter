@@ -14,7 +14,7 @@ canvas.height = 576
 
 
 //using canvas api (.fillRect draws a rectangle) to fill up canvas at starting from  0,0
-c.fillRect(0, 0, canvas.width, canvas.height)
+// c.fillRect(0, 0, canvas.width, canvas.height)
 
 
 // added a const gravity for the game 
@@ -46,6 +46,7 @@ class Sprite {
     }
     // takes in image, and splits the image into the max number of frames then multiply
     //it by the number of frames. then scales the image
+    //we subtract x, y offset passed in when creating new player because we want to improve position of sprites with large whitespace
 
     draw() {
         c.drawImage(
@@ -92,9 +93,9 @@ class Sprite {
 //added an attackbox for the character
 //added an is attacking value for each player
 //extends takes functions from sprite
-//in super you select inheritance from parent properties
+//in super you select inheritance from parent(Sprite) properties
 class Fighter extends Sprite{
-    constructor({ position, velocity, color = "white", imageSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 } }) {
+    constructor({ position, velocity, color = "white", imageSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 }, sprites }) {
         super({position, imageSrc, scale, framesMax, offset})
         this.velocity = velocity
         this.color = color
@@ -116,10 +117,17 @@ class Fighter extends Sprite{
         this.framesCurrent = 0
         this.framesElapsed = 0
         this.framesHold = 10
-        
+        this.sprites = sprites
 
 
+        //this sets the sprite to the new object/hash
 
+        for (const sprite in this.sprites) {
+            sprites[sprite].image = new Image()
+            sprites[sprite].image.src = sprites[sprite].imageSrc
+        }
+
+        console.log(this.sprites)
     }
     
     
@@ -129,11 +137,11 @@ class Fighter extends Sprite{
         this.draw()
         this.animateFrames()
         //sets the position of the x box to the characters position 
-        this.attackBox.position.x = this.position.x + this.attackBox.offset.x
-        this.attackBox.position.y = this.position.y
+        // this.attackBox.position.x = this.position.x + this.attackBox.offset.x
+        // this.attackBox.position.y = this.position.y
 
-        this.position.y += this.velocity.y
-        this.position.x += this.velocity.x
+        // this.position.y += this.velocity.y
+        // this.position.x += this.velocity.x
         //if the top of the character is at the bottom of the board then set drop to 0
         //else keep dropping
         // -18 from the bottom of the canvas so its not leveled on the border of canvas
@@ -148,9 +156,44 @@ class Fighter extends Sprite{
             this.isAttacking = false
         }, 100)
     }
+
+    switchSprite (sprite) {
+        switch (sprite) {
+            case 'idle':
+                if (this.image !== this.sprites.idle.image) {
+                    this.image === this.sprites.idle.image
+                    this.framesMax = this.sprites.idle.framesMax
+                    this.framesCurrent = 1
+                }
+                break
+            case 'runRight':
+                if (this.image !== this.sprites.runRight.image) {
+                    this.image = this.sprites.runRight.image
+                    this.framesMax = this.sprites.runRight.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'runLeft':
+                if (this.image !== this.sprites.runLeft.image) {
+                    this.image = this.sprites.runLeft.image
+                    this.framesMax = this.sprites.runLeft.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'jump':
+                if (this.image !== this.sprites.jump.image) {
+                this.image = this.sprites.jump.image
+                this.framesMax = this.sprites.jump.framesMax
+                    this.framesCurrent = 0
+            }
+            break
+        }
+    }
 }
 
 
+
+//this consts create new sprites that start at the positions x,y
 const background = new Sprite({
     position: {
         x: 0,
@@ -193,9 +236,33 @@ const player = new Fighter({
     offset: {
         x: 0,
         y: 0
+    },
+    sprites: {
+        idle: {
+            imageSrc: 'src/assets/Krillin/idle.png',
+            // scale: 0.75,
+            framesMax: 4,
+        },
+        runRight: {
+            imageSrc: 'src/assets/Krillin/runRight.png',
+            // scale: 0.75,
+            framesMax: 4,
+            image: new Image()
+        },
+        runLeft: {
+            imageSrc: 'src/assets/Krillin/runLeft.png',
+            // scale: 0.75,
+            framesMax: 4,
+            image: new Image()
+        },
+        jump: {
+            imageSrc: 'src/assets/Krillin/jump.png',
+            // scale: 0.75,
+            framesMax: 2,
+            image: new Image()
+        }
     }
-}
-)
+})
 
 const enemy = new Fighter({
     position: {
@@ -211,7 +278,7 @@ const enemy = new Fighter({
         x: -50,
         y: 0
     },
-    imageSrc: 'src/assets/Krillin/1.png',
+    imageSrc: 'src/assets/Krillin/idle.png',
     scale: 1.1,
     framesMax: 1
 })
@@ -245,7 +312,7 @@ const keys = {
 // collision for attackboxes and enemy
 //if the players x to width position is past enemys position and vise versa &&
 // players y to height is with in enemys height and vise versa 
-function rectangleCollision({rectangle1, rectangle2}) {
+function collisionBox({rectangle1, rectangle2}) {
     return (
         rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x &&
         rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width &&
@@ -297,20 +364,32 @@ function animate() {
     background.update()
     house.update()
     player.update()
-    enemy.update()
+    // enemy.update()
 
-    player.velocity.x = 0
-    enemy.velocity.x = 0
+    // player.velocity.x = 0
+    // enemy.velocity.x = 0
 
 
     //player movement 
     //if last key is pressed then player will move in that direction by altering velocity
+    //also the players sprite image is set to the correct animation sprite
+    player.switchSprite('idle')
     if (keys.a.pressed && player.lastKey === 'a') {
+        player.switchSprite('runLeft')
         player.velocity.x = -7
     } else if (keys.d.pressed && player.lastKey === 'd') {
+        player.switchSprite('runRight')
         player.velocity.x = 7 
-    } 
+    }
+    // } else if {
+    //     player.switchSprite('idle')
+    // }
 
+    if (player.velocity.y < 0) {
+        player.switchSprite('jump')
+    }
+    
+    
     //enemy movement same as players
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = -7
@@ -319,8 +398,10 @@ function animate() {
     } 
 
     //collision detect
-    // if rectanglecollision is true and is attacking is true
-    if (rectangleCollision({
+    // if  collisionBox is true and is attacking is true
+    //the if statement resets the player attacking to false,removes 10 from health
+    //and takes away a health width % of the enimmy health id in scss 
+    if (collisionBox({
         rectangle1: player,
         rectangle2: enemy
         }) && player.isAttacking) {
@@ -330,7 +411,7 @@ function animate() {
         console.log('player attack successful');
     }
 
-    if (rectangleCollision({ 
+    if (collisionBox({ 
         rectangle1: enemy,
         rectangle2: player 
         }) && enemy.isAttacking) {
