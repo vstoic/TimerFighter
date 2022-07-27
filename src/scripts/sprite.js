@@ -29,7 +29,6 @@ export default class Sprite {
   //we subtract x, y offset passed in when creating new player because we want to improve position of sprites with large whitespace
 
   draw() {
-    debugger
       this.c.drawImage(
           this.image,
           this.framesCurrent * (this.image.width / this.framesMax),

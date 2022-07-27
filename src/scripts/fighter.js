@@ -21,7 +21,16 @@ export default class Fighter extends Sprite {
         this.width = 50
         this.height = 65
         this.lastKey = ""
+        this.isAttacking
+        this.health = 100
+        this.framesCurrent = 0
+        this.framesElapsed = 0
+        this.framesHold = 10
+        this.sprites = obj.sprites
+        this.offset = obj.offset
+        this.gravity = obj.gravity
         this.attackBox = {
+            color: 'orange',
             position: {
                 x: this.position.x,
                 y: this.position.y
@@ -30,15 +39,6 @@ export default class Fighter extends Sprite {
             width: 65,
             height: 25
         }
-        this.isAttacking
-        this.health = 100
-        //same as in spriteclass but we dont want to overkill and put in into constructor argument
-        this.framesCurrent = 0
-        this.framesElapsed = 0
-        this.framesHold = 10
-        this.sprites = obj.sprites
-        this.offset = obj.offset
-        this.gravity = obj.gravity
         
         
 
@@ -63,15 +63,14 @@ export default class Fighter extends Sprite {
 
         this.position.y += this.velocity.y
         this.position.x += this.velocity.x
-        debugger
+
         //if the top of the character is at the bottom of the board then set drop to 0
         //else keep dropping
         // -18 from the bottom of the canvas so its not leveled on the border of canvas
         if (this.position.y + this.height + this.velocity.y >= this.canvasH - 18) {
             this.velocity.y = 0
-        } else {this.velocity.y += this.gravity
-        debugger} 
-
+            this.position.y = 493
+        } else {this.velocity.y += this.gravity} 
     }
     // when invoked attacking is character/bots isAttacking value set to true for 100ms then changed back to false
     attack() {
@@ -81,13 +80,20 @@ export default class Fighter extends Sprite {
         }, 100)
     }
 
-    switchSprite(sprites) {
+    playerSwitchSprite(sprites) {
         switch (sprites) {
-            case 'idle':
-                if (this.image !== this.sprites.idle.image) {
-                    this.image = this.sprites.idle.image
-                    this.framesMax = this.sprites.idle.framesMax
-                    this.framesCurrent = 1
+            case 'idleRight':
+                if (this.image !== this.sprites.idleRight.image) {
+                    this.image = this.sprites.idleRight.image
+                    this.framesMax = this.sprites.idleRight.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'idleLeft':
+                if (this.image !== this.sprites.idleLeft.image) {
+                    this.image = this.sprites.idleLeft.image
+                    this.framesMax = this.sprites.idleLeft.framesMax
+                    this.framesCurrent = 0
                 }
                 break
             case 'runRight':
@@ -105,9 +111,91 @@ export default class Fighter extends Sprite {
                 }
                 break
             case 'jump':
-                if (this.image !== this.sprites.jump.image) {
+                if ((this.image !== this.sprites.jump.image) && this.lastKey === 'd') {
                     this.image = this.sprites.jump.image
                     this.framesMax = this.sprites.jump.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'drop':
+                if ((this.image !== this.sprites.drop.image) && this.lastKey === 'd') {
+                    this.image = this.sprites.drop.image
+                    this.framesMax = this.sprites.drop.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'jumpLeft':
+                if ((this.image !== this.sprites.jumpLeft.image) && this.lastKey === 'a') {
+                    this.image = this.sprites.jumpLeft.image
+                    this.framesMax = this.sprites.jumpLeft.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'dropLeft':
+                if ((this.image !== this.sprites.dropLeft.image) && this.lastKey === 'a') {
+                    this.image = this.sprites.dropLeft.image
+                    this.framesMax = this.sprites.dropLeft.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+        }
+    }
+
+    enemySwitchSprite(sprites) {
+        switch (sprites) {
+            case 'idleRight':
+                if (this.image !== this.sprites.idleRight.image) {
+                    this.image = this.sprites.idleRight.image
+                    this.framesMax = this.sprites.idleRight.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'idleLeft':
+                if (this.image !== this.sprites.idleLeft.image) {
+                    this.image = this.sprites.idleLeft.image
+                    this.framesMax = this.sprites.idleLeft.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'runRight':
+                if (this.image !== this.sprites.runRight.image) {
+                    this.image = this.sprites.runRight.image
+                    this.framesMax = this.sprites.runRight.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'runLeft':
+                if (this.image !== this.sprites.runLeft.image) {
+                    this.image = this.sprites.runLeft.image
+                    this.framesMax = this.sprites.runLeft.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'jump':
+                if ((this.image !== this.sprites.jump.image) && this.lastKey === 'ArrowRight') {
+                    this.image = this.sprites.jump.image
+                    this.framesMax = this.sprites.jump.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'drop':
+                if ((this.image !== this.sprites.drop.image) && this.lastKey === 'ArrowRight') {
+                    this.image = this.sprites.drop.image
+                    this.framesMax = this.sprites.drop.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'jumpLeft':
+                if ((this.image !== this.sprites.jumpLeft.image) && this.lastKey === 'ArrowLeft') {
+                    this.image = this.sprites.jumpLeft.image
+                    this.framesMax = this.sprites.jumpLeft.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'dropLeft':
+                if ((this.image !== this.sprites.dropLeft.image) && this.lastKey === 'ArrowLeft') {
+                    this.image = this.sprites.dropLeft.image
+                    this.framesMax = this.sprites.dropLeft.framesMax
                     this.framesCurrent = 0
                 }
                 break
