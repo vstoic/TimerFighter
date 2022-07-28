@@ -13,7 +13,7 @@ export default class Game {
         this.canvasHeight = height
         this.gravity = 0.4
         this.timerId = setTimeout(this.decreaseTimer(), 1000)
-        this.time = 500
+        this.time = 3000
         // window.requestAnimationFrame(this.animate.bind(this))
         
         this.enemy = new Fighter({
