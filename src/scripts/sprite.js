@@ -3,6 +3,9 @@
     //also invokes the draw() function
     // frames elapsed is for how many frames the game is going through
     //frames hold is how many frames elapsed until you loop the current frame
+
+
+
     //c, position, imageSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 }
 export default class Sprite {
   constructor( obj ) {
@@ -39,7 +42,8 @@ export default class Sprite {
           this.position.y - this.offset.y,
           (this.image.width / this.framesMax) * this.scale,
           this.image.height * this.scale
-      )
+          )
+          
 
   }
   //to the current frame. 

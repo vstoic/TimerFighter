@@ -12,7 +12,8 @@ export default class Game {
         this.canvasWidth = width
         this.canvasHeight = height
         this.gravity = 0.4
-        this.time = 15
+        this.timerId = setTimeout(this.decreaseTimer(), 1000)
+        this.time = 9000
         // window.requestAnimationFrame(this.animate.bind(this))
         
         this.enemy = new Fighter({
@@ -20,54 +21,55 @@ export default class Game {
             canvas: this.canvas,
             canvasWidth: this.canvasWidth,
             canvasHeight: this.canvasHeight,
-            imageSrc: 'src/assets/Clown/idleLeft.png',
+            imageSrc: 'src/assets/Kakashi/idleLeft.png',
             sprites: {
                 idleRight: {
-                    imageSrc: 'src/assets/Clown/idleRight.png',
+                    imageSrc: 'src/assets/Kakashi/idleRight.png',
                     // scale: 0.75,
-                    framesMax: 4.815,
+                    framesMax: 4,
                 },
                 idleLeft: {
-                    imageSrc: 'src/assets/Clown/idleLeft.png',
+                    imageSrc: 'src/assets/Kakashi/idleLeft.png',
                     // scale: 0.75,
-                    framesMax: 4.815,
+                    framesMax: 4,
                 },
                 runRight: {
-                    imageSrc: 'src/assets/Clown/idleRight.png',
+                    imageSrc: 'src/assets/Kakashi/runRight.png',
                     // scale: 0.75,
-                    framesMax: 4.815,
-                    image: new Image()
+                    framesMax: 6,
+                    // image: new Image()
                 },
                 runLeft: {
-                    imageSrc: 'src/assets/Clown/idleLeft.png',
+                    imageSrc: 'src/assets/Kakashi/runLeft.png',
                     // scale: 0.75,
-                    framesMax: 4.815,
-                    image: new Image()
+                    framesMax: 6,
+                    // image: new Image()
                 },
                 jump: {
-                    imageSrc: 'src/assets/Clown/idleRight.png',
+                    imageSrc: 'src/assets/Kakashi/idleRight.png',
                     // scale: 0.75,
-                    framesMax: 4.815,
-                    image: new Image()
+                    framesMax: 4,
+                    // image: new Image()
                 },
                 drop: {
-                    imageSrc: 'src/assets/Clown/idleRight.png',
+                    imageSrc: 'src/assets/Kakashi/idleRight.png',
                     // scale: 0.75,
-                    framesMax: 4.815,
-                    image: new Image()
+                    framesMax: 4,
+                    // image: new Image()
                 },
                 jumpLeft: {
-                    imageSrc: 'src/assets/Clown/idleLeft.png',
+                    imageSrc: 'src/assets/Kakashi/idleLeft.png',
                     // scale: 0.75,
-                    framesMax: 4.815,
-                    image: new Image()
+                    framesMax: 4,
+                    // image: new Image()
                 },
                 dropLeft: {
-                    imageSrc: 'src/assets/Clown/idleLeft.png',
+                    imageSrc: 'src/assets/Kakashi/idleLeft.png',
                     // scale: 0.75,
-                    framesMax: 4.815,
-                    image: new Image()
-                },
+                    framesMax: 4,
+                    // image: new Image()
+                }
+            
             },
             position: {
                 x: 800,
@@ -79,15 +81,17 @@ export default class Game {
             },
             offset: {
                 x: 0,
-                y: 60
+                y: 10
             },
             scale: 0.65,
-            framesMax: 5,
+            framesMax: 4,
             attackOffset: {
                 x: 0,
                 y: 0
             },
-            gravity: this.gravity
+            gravity: this.gravity,
+            frameHold: 10
+        
         })
 
 
@@ -135,7 +139,7 @@ export default class Game {
                 jumpLeft: {
                     imageSrc: 'src/assets/Krillin/jumpLeft.png',
                     // scale: 0.75,
-                    framesMax: 4,
+                    framesMax: 2,
                     // image: new Image()
                 },
                 dropLeft: {
@@ -144,6 +148,18 @@ export default class Game {
                     framesMax: 2,
                     // image: new Image()
                 },
+                punchRight: {
+                    imageSrc: 'src/assets/Krillin/punchRight.png',
+                    // scale: 0.6,
+                    framesMax: 3.7,
+                    // image: new Image()
+                },
+                punchLeft: {
+                    imageSrc: 'src/assets/Krillin/punchLeft.png',
+                    // scale: 0.6,
+                    framesMax: 3.8,
+                    // image: new Image()
+                }
             },
             position: {
                 x: 50,
@@ -155,9 +171,9 @@ export default class Game {
             },
             offset: {
                 x: 0,
-                y: 0
+                y: -15
             },
-            scale: 0.75,
+            scale: 0.6,
             framesMax: 4,
             attackOffset: {
                 x: 0,
@@ -239,32 +255,43 @@ export default class Game {
             }
         } 
 
-        
+        determineWinner( player, enemy, timerId ) {
+            clearTimeout(timerId)
+            document.querySelector('#displayTie').style.display = 'flex'
+            if (player.health === enemy.health) {
+                document.querySelector('#displayTie').innerHTML = 'Tie'
+            } else if (player.health > enemy.health) {
+                document.querySelector('#displayTie').innerHTML = 'Player 1 Wins!'
+            } else if (player.health < enemy.health) {
+                document.querySelector('#displayTie').innerHTML = 'Player 2 Wins!'
+            }
+        }
 
     
         
         decreaseTimer() {
             if (this.time > 0) {
-                this.timerId = setTimeout(decreaseTimer, 1000)
+                this.timerId
                 this.time--
                 document.querySelector('#timer').innerHTML = this.time
             }
 
 
             if (this.time === 0) {
-                determineWinner({ player, enemy, timerId })
+                this.determineWinner( this.player, this.enemy, this.timerId )
             }
         }
-
+        
 
         
         animate() {
+            this.decreaseTimer()
             this.c.fillStyle = "black"
             this.c.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
             this.background.update()
             this.house.update()
-            this.player.update()
             this.enemy.update()
+            this.player.update()
 
             this.player.velocity.x = 0
             this.enemy.velocity.x = 0
@@ -285,9 +312,9 @@ export default class Game {
                 this.player.playerSwitchSprite('idleLeft')
             }
             
-            if ((this.player.velocity.y < 0) ) {
+            if ((this.player.velocity.y < 0) && this.player.lastKey === 'a') {
                 this.player.playerSwitchSprite('jumpLeft')
-            } else if ((this.player.velocity.y > 0)) {
+            } else if ((this.player.velocity.y > 0) && this.player.lastKey === 'a') {
                 this.player.playerSwitchSprite('dropLeft')
             }
 
@@ -302,13 +329,13 @@ export default class Game {
             //enemy movement
             if (this.keys.ArrowLeft.pressed && this.enemy.lastKey === 'ArrowLeft') {
                 this.enemy.enemySwitchSprite('runLeft')
-                this.enemy.velocity.x = -7
+                this.enemy.velocity.x = -2
             } else if (this.keys.ArrowRight.pressed && this.enemy.lastKey === 'ArrowRight') {
                 this.enemy.enemySwitchSprite('runRight')
-                this.enemy.velocity.x = 7
-            } else if ((this.enemy.lastKey === 'ArrowRight') && this.enemy.velocity.x === 0) {
+                this.enemy.velocity.x = 2
+            } else if ((this.enemy.lastKey === 'ArrowRight') && (this.enemy.velocity.x === 0)) {
                 this.enemy.enemySwitchSprite('idleRight')
-            } else if ((this.enemy.lastKey === 'ArrowLeft') && this.enemy.velocity.x === 0) {
+            } else if ((this.enemy.lastKey === 'ArrowLeft') && (this.enemy.velocity.x === 0)) {
                 this.enemy.enemySwitchSprite('idleLeft')
             }
 
@@ -330,8 +357,8 @@ export default class Game {
             // and takes away a health width % of the enimmy health id in scss 
             if (this.collisionBox() && this.player.isAttacking) {
                 this.player.isAttacking = false
-                this.enemy.health -= 10
-                document.querySelector('#enemy-health').style.width = this.enemy.health + '%'
+                this.enemy.health -= 1
+                document.querySelector('#enemyHealth').style.width = this.enemy.health + '%'
                 console.log('player attack successful');
             }
 
@@ -345,13 +372,15 @@ export default class Game {
 
             //end game by health
             if (this.player.health <= 0 || this.enemy.health <= 0) {
-                determineWinner({ player, enemy, timerId })
+                this.determineWinner(this.player, this.enemy, this.timerId )
             }
             window.requestAnimationFrame(this.animate.bind(this))
             
         }
         eventListener() {
             window.addEventListener('keydown', (event) => {
+
+                
                 switch (event.key) {
                     case 'd':
                     this.keys.d.pressed = true

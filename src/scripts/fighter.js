@@ -57,7 +57,7 @@ export default class Fighter extends Sprite {
         
         this.draw()
         this.animateFrames()
-        //sets the position of the x box to the characters position 
+        //sets the position of the attack box to the characters position 
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
         this.attackBox.position.y = this.position.y
 
@@ -74,13 +74,32 @@ export default class Fighter extends Sprite {
     }
     // when invoked attacking is character/bots isAttacking value set to true for 100ms then changed back to false
     attack() {
+        if (this.image === this.sprites.idleRight.image) {
+            this.playerSwitchSprite('punchRight')
+        } else if (this.image === this.sprites.idleLeft.image) {
+            this.playerSwitchSprite('punchLeft')
+        }
         this.isAttacking = true
-        setTimeout(() => {
-            this.isAttacking = false
-        }, 100)
+        // setTimeout(() => {
+        //     this.isAttacking = false
+        // }, 100)
     }
 
     playerSwitchSprite(sprites) {
+        if (
+            this.image === this.sprites.punchRight.image &&
+            this.framesCurrent < this.sprites.punchRight.framesMax - 1
+        )
+            return;
+
+        if (
+            this.image === this.sprites.punchLeft.image &&
+            this.framesCurrent < this.sprites.punchLeft.framesMax - 1
+        )
+            return;
+
+
+
         switch (sprites) {
             case 'idleRight':
                 if (this.image !== this.sprites.idleRight.image) {
@@ -138,10 +157,26 @@ export default class Fighter extends Sprite {
                     this.framesCurrent = 0
                 }
                 break
+            case 'punchRight':
+                if (this.image !== this.sprites.punchRight.image) {
+                    this.image = this.sprites.punchRight.image
+                    this.framesMax = this.sprites.punchRight.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'punchLeft':
+                if (this.image !== this.sprites.punchLeft.image) {
+                    this.image = this.sprites.punchLeft.image
+                    this.framesMax = this.sprites.punchLeft.framesMax
+                    this.framesCurrent = 0
+                }
+                break
         }
     }
 
     enemySwitchSprite(sprites) {
+        
+
         switch (sprites) {
             case 'idleRight':
                 if (this.image !== this.sprites.idleRight.image) {
