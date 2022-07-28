@@ -25,12 +25,11 @@ export default class Fighter extends Sprite {
         this.health = 100
         this.framesCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 10
+        this.framesHold = 15
         this.sprites = obj.sprites
         this.offset = obj.offset
         this.gravity = obj.gravity
         this.attackBox = {
-            color: 'orange',
             position: {
                 x: this.position.x,
                 y: this.position.y
@@ -39,6 +38,7 @@ export default class Fighter extends Sprite {
             width: 65,
             height: 25
         }
+        
         
         
 

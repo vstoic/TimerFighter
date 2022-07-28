@@ -20,52 +20,52 @@ export default class Game {
             canvas: this.canvas,
             canvasWidth: this.canvasWidth,
             canvasHeight: this.canvasHeight,
-            imageSrc: 'src/assets/Krillin/idleRight.png',
+            imageSrc: 'src/assets/Clown/idleLeft.png',
             sprites: {
                 idleRight: {
-                    imageSrc: 'src/assets/Krillin/idleRight.png',
+                    imageSrc: 'src/assets/Clown/idleRight.png',
                     // scale: 0.75,
-                    framesMax: 4,
+                    framesMax: 4.815,
                 },
                 idleLeft: {
-                    imageSrc: 'src/assets/Krillin/idleLeft.png',
+                    imageSrc: 'src/assets/Clown/idleLeft.png',
                     // scale: 0.75,
-                    framesMax: 4,
+                    framesMax: 4.815,
                 },
                 runRight: {
-                    imageSrc: 'src/assets/Krillin/runRight.png',
+                    imageSrc: 'src/assets/Clown/idleRight.png',
                     // scale: 0.75,
-                    framesMax: 4,
+                    framesMax: 4.815,
                     image: new Image()
                 },
                 runLeft: {
-                    imageSrc: 'src/assets/Krillin/runLeft.png',
+                    imageSrc: 'src/assets/Clown/idleLeft.png',
                     // scale: 0.75,
-                    framesMax: 4,
+                    framesMax: 4.815,
                     image: new Image()
                 },
                 jump: {
-                    imageSrc: 'src/assets/Krillin/jump.png',
+                    imageSrc: 'src/assets/Clown/idleRight.png',
                     // scale: 0.75,
-                    framesMax: 4,
+                    framesMax: 4.815,
                     image: new Image()
                 },
                 drop: {
-                    imageSrc: 'src/assets/Krillin/drop.png',
+                    imageSrc: 'src/assets/Clown/idleRight.png',
                     // scale: 0.75,
-                    framesMax: 2,
+                    framesMax: 4.815,
                     image: new Image()
                 },
                 jumpLeft: {
-                    imageSrc: 'src/assets/Krillin/jumpLeft.png',
+                    imageSrc: 'src/assets/Clown/idleLeft.png',
                     // scale: 0.75,
-                    framesMax: 4,
+                    framesMax: 4.815,
                     image: new Image()
                 },
                 dropLeft: {
-                    imageSrc: 'src/assets/Krillin/dropLeft.png',
+                    imageSrc: 'src/assets/Clown/idleLeft.png',
                     // scale: 0.75,
-                    framesMax: 2,
+                    framesMax: 4.815,
                     image: new Image()
                 },
             },
@@ -79,10 +79,10 @@ export default class Game {
             },
             offset: {
                 x: 0,
-                y: 0
+                y: 60
             },
-            scale: 0.75,
-            framesMax: 4,
+            scale: 0.65,
+            framesMax: 5,
             attackOffset: {
                 x: 0,
                 y: 0
@@ -112,37 +112,37 @@ export default class Game {
                     imageSrc: 'src/assets/Krillin/runRight.png',
                     // scale: 0.75,
                     framesMax: 4,
-                    image: new Image()
+                    // image: new Image()
                 },
                 runLeft: {
                     imageSrc: 'src/assets/Krillin/runLeft.png',
                     // scale: 0.75,
                     framesMax: 4,
-                    image: new Image()
+                    // image: new Image()
                 },
                 jump: {
                     imageSrc: 'src/assets/Krillin/jump.png',
                     // scale: 0.75,
                     framesMax: 4,
-                    image: new Image()
+                    // image: new Image()
                 },
                 drop: {
                     imageSrc: 'src/assets/Krillin/drop.png',
                     // scale: 0.75,
                     framesMax: 2,
-                    image: new Image()
+                    // image: new Image()
                 },
                 jumpLeft: {
                     imageSrc: 'src/assets/Krillin/jumpLeft.png',
                     // scale: 0.75,
                     framesMax: 4,
-                    image: new Image()
+                    // image: new Image()
                 },
                 dropLeft: {
                     imageSrc: 'src/assets/Krillin/dropLeft.png',
                     // scale: 0.75,
                     framesMax: 2,
-                    image: new Image()
+                    // image: new Image()
                 },
             },
             position: {
@@ -163,7 +163,8 @@ export default class Game {
                 x: 0,
                 y: 0
             },
-        gravity: this.gravity
+        gravity: this.gravity,
+        frameHold: 10
         })
         
 
@@ -219,15 +220,23 @@ export default class Game {
         }
         this.eventListener()
     }
+
+        // border (x, y, width, height) {
+        //     draw()
+        // }
+
+
         // collision for attackboxes and this.enemy
         //if the players x to width position is past enemys position and vise versa &&
         // players y to height is with in enemys height and vise versa 
-        collisionBox({ rectangle1, rectangle2 }) {
-            return (
-            rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x &&
-            rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width &&
-            rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y &&
-            rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height )
+        collisionBox() {
+            if (
+            this.player.attackBox.position.x + this.player.attackBox.width >= this.enemy.position.x &&
+            this.player.attackBox.position.x <= this.enemy.position.x + this.enemy.width &&
+            this.player.attackBox.position.y + this.player.attackBox.height >= this.enemy.position.y &&
+            this.player.attackBox.position.y <= this.enemy.position.y + this.enemy.height ) {return true} {
+                false
+            }
         } 
 
         
@@ -236,7 +245,7 @@ export default class Game {
         
         decreaseTimer() {
             if (this.time > 0) {
-                this.timerId = setTimeout(decreaseTimer(), 1000)
+                this.timerId = setTimeout(decreaseTimer, 1000)
                 this.time--
                 document.querySelector('#timer').innerHTML = this.time
             }
@@ -276,9 +285,9 @@ export default class Game {
                 this.player.playerSwitchSprite('idleLeft')
             }
             
-            if ((this.player.velocity.y < 0) && this.player.lastKey === 'a') {
+            if ((this.player.velocity.y < 0) ) {
                 this.player.playerSwitchSprite('jumpLeft')
-            } else if ((this.player.velocity.y > 0) && this.player.lastKey === 'a') {
+            } else if ((this.player.velocity.y > 0)) {
                 this.player.playerSwitchSprite('dropLeft')
             }
 
@@ -319,26 +328,20 @@ export default class Game {
             // if  collisionBox is true and is attacking is true
             // the if statement resets the player attacking to false,removes 10 from health
             // and takes away a health width % of the enimmy health id in scss 
-            // if (collisionBox({
-            //     rectangle1: this.player,
-            //     rectangle2: this.enemy
-            // }) && player.isAttacking) {
-            //     this.player.isAttacking = false
-            //     this.enemy.health -= 10
-            //     document.querySelector('#enemy-health').style.width = this.enemy.health + '%'
-            //     console.log('player attack successful');
-            // }
+            if (this.collisionBox() && this.player.isAttacking) {
+                this.player.isAttacking = false
+                this.enemy.health -= 10
+                document.querySelector('#enemy-health').style.width = this.enemy.health + '%'
+                console.log('player attack successful');
+            }
 
-            // //enemy 
-            // if (collisionBox({
-            //     rectangle1: this.enemy,
-            //     rectangle2: this.player
-            // }) && this.enemy.isAttacking) {
-            //     this.enemy.isAttacking = false
-            //     this.player.health -= 10
-            //     document.querySelector('#player-health').style.width = this.player.health + '%'
-            //     console.log('enemy attack successful');
-            // }
+            //enemy 
+            if (this.collisionBox() && this.enemy.isAttacking) {
+                this.enemy.isAttacking = false
+                this.player.health -= 10
+                document.querySelector('#player-health').style.width = this.player.health + '%'
+                console.log('enemy attack successful');
+            }
 
             //end game by health
             if (this.player.health <= 0 || this.enemy.health <= 0) {
