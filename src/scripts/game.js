@@ -13,7 +13,7 @@ export default class Game {
         this.canvasHeight = height
         this.gravity = 0.4
         this.timerId = setTimeout(this.decreaseTimer(), 1000)
-        this.time = 9000
+        this.time = 500
         // window.requestAnimationFrame(this.animate.bind(this))
         
         this.enemy = new Fighter({
@@ -46,27 +46,27 @@ export default class Game {
                     // image: new Image()
                 },
                 jump: {
-                    imageSrc: 'src/assets/Kakashi/idleRight.png',
+                    imageSrc: 'src/assets/Kakashi/jumpRight.png',
                     // scale: 0.75,
-                    framesMax: 4,
+                    framesMax: 2,
                     // image: new Image()
                 },
                 drop: {
-                    imageSrc: 'src/assets/Kakashi/idleRight.png',
+                    imageSrc: 'src/assets/Kakashi/dropRight.png',
                     // scale: 0.75,
-                    framesMax: 4,
+                    framesMax: 2,
                     // image: new Image()
                 },
                 jumpLeft: {
-                    imageSrc: 'src/assets/Kakashi/idleLeft.png',
+                    imageSrc: 'src/assets/Kakashi/jumpLeft.png',
                     // scale: 0.75,
-                    framesMax: 4,
+                    framesMax: 2,
                     // image: new Image()
                 },
                 dropLeft: {
-                    imageSrc: 'src/assets/Kakashi/idleLeft.png',
+                    imageSrc: 'src/assets/Kakashi/dropLeft.png',
                     // scale: 0.75,
-                    framesMax: 4,
+                    framesMax: 2,
                     // image: new Image()
                 }
             
@@ -81,9 +81,9 @@ export default class Game {
             },
             offset: {
                 x: 0,
-                y: 10
+                y: 12
             },
-            scale: 0.65,
+            scale: 1.15,
             framesMax: 4,
             attackOffset: {
                 x: 0,
@@ -156,7 +156,7 @@ export default class Game {
                 },
                 punchLeft: {
                     imageSrc: 'src/assets/Krillin/punchLeft.png',
-                    // scale: 0.6,
+                    // scale: 1,
                     framesMax: 3.8,
                     // image: new Image()
                 }
@@ -171,7 +171,7 @@ export default class Game {
             },
             offset: {
                 x: 0,
-                y: -15
+                y: -28
             },
             scale: 0.6,
             framesMax: 4,
@@ -258,12 +258,10 @@ export default class Game {
         determineWinner( player, enemy, timerId ) {
             clearTimeout(timerId)
             document.querySelector('#displayTie').style.display = 'flex'
-            if (player.health === enemy.health) {
-                document.querySelector('#displayTie').innerHTML = 'Tie'
-            } else if (player.health > enemy.health) {
-                document.querySelector('#displayTie').innerHTML = 'Player 1 Wins!'
-            } else if (player.health < enemy.health) {
-                document.querySelector('#displayTie').innerHTML = 'Player 2 Wins!'
+            if (0 >= enemy.health) {
+                document.querySelector('#displayTie').innerHTML = 'GG, You Win!'
+            } else if (0 <= enemy.health) {
+                document.querySelector('#displayTie').innerHTML = 'Times Up! You Lose :)'
             }
         }
 
@@ -357,7 +355,7 @@ export default class Game {
             // and takes away a health width % of the enimmy health id in scss 
             if (this.collisionBox() && this.player.isAttacking) {
                 this.player.isAttacking = false
-                this.enemy.health -= 1
+                this.enemy.health -= 5
                 document.querySelector('#enemyHealth').style.width = this.enemy.health + '%'
                 console.log('player attack successful');
             }

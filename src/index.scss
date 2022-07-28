@@ -38,10 +38,11 @@ html{
         color: white;
 }
 
-#healthBackground {
-    background-color: limegreen;
-    height: 20px;
-}
+// #healthBackground {
+//     background-color: limegreen;
+//     height: 20px;
+//     width: 576px;
+// }
 
 #enemyHealth {
     position: absolute;
@@ -49,7 +50,8 @@ html{
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0;
+    left: 10;
+    width: 576px;
 }
 
 #displayTie {

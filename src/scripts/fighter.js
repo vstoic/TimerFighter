@@ -54,7 +54,6 @@ export default class Fighter extends Sprite {
 
     //the update method adds the drop speed(gravity) to y for each time the frame is loaded through draw
     update() {
-        
         this.draw()
         this.animateFrames()
         //sets the position of the attack box to the characters position 

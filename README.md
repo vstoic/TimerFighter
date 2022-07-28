@@ -5,21 +5,22 @@ Each characters have different styles of play and sets of moves. It will be up t
 
 ## Functionality & MVPs:
 
-Core features or functionalities
--Has many unique characters, each with their own attack combinations
--Players select a character, map, timer and game dificulty
--There will always be one bot to fight
--Bots will improve blocking intuition for every other spawn
--A detailed character combo list 
--Music & sound 
+Core features or functionalities<br/>
+-Has many unique characters, each with their own attack combinations<br/>
+-Players select a character, map, timer and game dificulty<br/>
+-There will always be one bot to fight<br/>
+-Bots will improve blocking intuition for every other spawn<br/>
+-A detailed character combo list <br/>
+-Music & sound <br/>
 
 ## Other Aspects:
-{ A lobby animation screen }
-{ Character select screen with character combonation tables }
-{ Music selection with queue }
-{ Production Readme }
+{ A lobby animation screen }<br/>
+{ Character select screen with character combonation tables }<br/>
+{ Music selection with queue }<br/>
+{ Production Readme }<br/>
 
 ## Wireframes:
+![Hot Nets Home Page](wireframes/demo.png)
 
 ![Hot Nets Home Page](wireframes/browser_page.png)
 
@@ -27,13 +28,15 @@ Core features or functionalities
 
 ![Hot Nets Home Page](wireframes/game.png)
 
+
+
 ## Implementation Timeline:
-Friday Afternoon - project setup
-Weekend - create player and bots, move characters with event listeners
-Monday - attacks & combos, gametimer,  
-Tuesday - game menu
-Wednesday - sprite implementation
-Thursday Morning - sprite implementation
+Friday Afternoon - project setup<br/>
+Weekend - create player and bots, move characters with event listeners<br/>
+Monday - attacks & combos, gametimer<br/>  
+Tuesday - game menu<br/>
+Wednesday - sprite implementation<br/>
+Thursday Morning - sprite implementation<br/>
 
 
 
