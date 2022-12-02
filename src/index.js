@@ -14,6 +14,4 @@ document.addEventListener('DOMContentLoaded', () => {
     let game = new Game(c, canvas, canvas.width, canvas.height);
     game.animate()
     game.decreaseTimer()
-
-    
 })

@@ -7,7 +7,6 @@ import Sprite from './sprite.js'
     //added an is attacking value for each player
     //extends takes functions from sprite
     //in super you select inheritance from parent(Sprite) properties
-
 export default class Fighter extends Sprite {
     constructor(obj) {
         super( {imageSrc: obj.imageSrc,scale: obj.scale,framesMax: obj.framesMax,offset: obj.offset} )
@@ -38,10 +37,6 @@ export default class Fighter extends Sprite {
             width: 65,
             height: 25
         }
-        
-        
-        
-
         //this sets the sprite to the new object/hash
 
         for (const sprite in this.sprites) {
@@ -49,9 +44,6 @@ export default class Fighter extends Sprite {
             this.sprites[sprite].image.src = this.sprites[sprite].imageSrc
         }
     }
-
-
-
     //the update method adds the drop speed(gravity) to y for each time the frame is loaded through draw
     update() {
         this.draw()
@@ -83,7 +75,6 @@ export default class Fighter extends Sprite {
         //     this.isAttacking = false
         // }, 100)
     }
-
     playerSwitchSprite(sprites) {
         if (
             this.image === this.sprites.punchRight.image &&
@@ -174,8 +165,6 @@ export default class Fighter extends Sprite {
     }
 
     enemySwitchSprite(sprites) {
-        
-
         switch (sprites) {
             case 'idleRight':
                 if (this.image !== this.sprites.idleRight.image) {

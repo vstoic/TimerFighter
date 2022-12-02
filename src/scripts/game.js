@@ -15,13 +15,12 @@ export default class Game {
         this.timerId = setTimeout(this.decreaseTimer(), 1000)
         this.time = 3000
         // window.requestAnimationFrame(this.animate.bind(this))
-        
         this.enemy = new Fighter({
             c: this.c,
             canvas: this.canvas,
             canvasWidth: this.canvasWidth,
             canvasHeight: this.canvasHeight,
-            imageSrc: 'src/assets/Kakashi/idleLeft.png',
+            imageSrc: 'src/assets/kakashi/idleLeft.png',
             sprites: {
                 idleRight: {
                     imageSrc: 'src/assets/Kakashi/idleRight.png',
@@ -29,47 +28,46 @@ export default class Game {
                     framesMax: 4,
                 },
                 idleLeft: {
-                    imageSrc: 'src/assets/Kakashi/idleLeft.png',
+                    imageSrc: 'src/assets/kakashi/idleLeft.png',
                     // scale: 0.75,
                     framesMax: 4,
                 },
                 runRight: {
-                    imageSrc: 'src/assets/Kakashi/runRight.png',
+                    imageSrc: 'src/assets/kakashi/runRight.png',
                     // scale: 0.75,
                     framesMax: 6,
                     // image: new Image()
                 },
                 runLeft: {
-                    imageSrc: 'src/assets/Kakashi/runLeft.png',
+                    imageSrc: 'src/assets/kakashi/runLeft.png',
                     // scale: 0.75,
                     framesMax: 6,
                     // image: new Image()
                 },
                 jump: {
-                    imageSrc: 'src/assets/Kakashi/jumpRight.png',
+                    imageSrc: 'src/assets/kakashi/jumpRight.png',
                     // scale: 0.75,
                     framesMax: 2,
                     // image: new Image()
                 },
                 drop: {
-                    imageSrc: 'src/assets/Kakashi/dropRight.png',
+                    imageSrc: 'src/assets/kakashi/dropRight.png',
                     // scale: 0.75,
                     framesMax: 2,
                     // image: new Image()
                 },
                 jumpLeft: {
-                    imageSrc: 'src/assets/Kakashi/jumpLeft.png',
+                    imageSrc: 'src/assets/kakashi/jumpLeft.png',
                     // scale: 0.75,
                     framesMax: 2,
                     // image: new Image()
                 },
                 dropLeft: {
-                    imageSrc: 'src/assets/Kakashi/dropLeft.png',
+                    imageSrc: 'src/assets/kakashi/dropLeft.png',
                     // scale: 0.75,
                     framesMax: 2,
                     // image: new Image()
                 }
-            
             },
             position: {
                 x: 800,
@@ -91,10 +89,7 @@ export default class Game {
             },
             gravity: this.gravity,
             frameHold: 10
-        
         })
-
-
         this.player = new Fighter({
             c: this.c,
             canvas: this.canvas,
@@ -182,8 +177,6 @@ export default class Game {
         gravity: this.gravity,
         frameHold: 10
         })
-        
-
         this.background = new Sprite({
             c: this.c,
             position: {
@@ -198,7 +191,6 @@ export default class Game {
                 y: 0
             },
         })
-
         this.house = new Sprite({
             c: this.c,
             position: {
@@ -213,7 +205,6 @@ export default class Game {
                 y: 0
             },
         })
-
         this.keys = {
             a: {
                 pressed: false
@@ -236,12 +227,9 @@ export default class Game {
         }
         this.eventListener()
     }
-
         // border (x, y, width, height) {
         //     draw()
         // }
-
-
         // collision for attackboxes and this.enemy
         //if the players x to width position is past enemys position and vise versa &&
         // players y to height is with in enemys height and vise versa 
@@ -254,7 +242,6 @@ export default class Game {
                 false
             }
         } 
-
         determineWinner( player, enemy, timerId ) {
             clearTimeout(timerId)
             document.querySelector('#displayTie').style.display = 'flex'
@@ -264,24 +251,16 @@ export default class Game {
                 document.querySelector('#displayTie').innerHTML = 'Times Up! You Lose :)'
             }
         }
-
-    
-        
         decreaseTimer() {
             if (this.time > 0) {
                 this.timerId
                 this.time--
                 document.querySelector('#timer').innerHTML = this.time
             }
-
-
             if (this.time === 0) {
                 this.determineWinner( this.player, this.enemy, this.timerId )
             }
         }
-        
-
-        
         animate() {
             this.decreaseTimer()
             this.c.fillStyle = "black"
@@ -290,11 +269,8 @@ export default class Game {
             this.house.update()
             this.enemy.update()
             this.player.update()
-
             this.player.velocity.x = 0
             this.enemy.velocity.x = 0
-
-
             //player movement 
             //if last key is pressed then player will move in that direction by altering velocity
             //also the players sprite image is set to the correct animation sprite
@@ -309,21 +285,16 @@ export default class Game {
             } else if ((this.player.lastKey === 'a') && this.player.velocity.x === 0) {
                 this.player.playerSwitchSprite('idleLeft')
             }
-            
             if ((this.player.velocity.y < 0) && this.player.lastKey === 'a') {
                 this.player.playerSwitchSprite('jumpLeft')
             } else if ((this.player.velocity.y > 0) && this.player.lastKey === 'a') {
                 this.player.playerSwitchSprite('dropLeft')
             }
-
             if ((this.player.velocity.y < 0) && this.player.lastKey === 'd' ) {
                 this.player.playerSwitchSprite('jump')
             } else if ((this.player.velocity.y > 0) && this.player.lastKey === 'd') {
                 this.player.playerSwitchSprite('drop')
             } 
-            
-
-
             //enemy movement
             if (this.keys.ArrowLeft.pressed && this.enemy.lastKey === 'ArrowLeft') {
                 this.enemy.enemySwitchSprite('runLeft')
@@ -412,7 +383,6 @@ export default class Game {
                     break
                 }
             })
-
         window.addEventListener('keyup', (event) => {
             switch (event.key) {
                 case 'd':
@@ -425,7 +395,6 @@ export default class Game {
                     this.keys.w.pressed = false
                     break
             }
-
             //enemys
             switch (event.key) {
                 case 'ArrowRight':
@@ -442,4 +411,3 @@ export default class Game {
         })
     } 
 }
-
