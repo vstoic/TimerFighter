@@ -2,7 +2,7 @@ html{
     background-color: black;
 }
 
-#gameTitle{
+.title {
     font-size: 40px;
     display: flex;
     color: white;
@@ -28,7 +28,7 @@ html{
     padding: 0 px;
 }
 
-#timer {
+.timer {
         background-color: black;
         display: flex;
         align-items: center;
@@ -38,11 +38,11 @@ html{
         color: white;
 }
 
-// #healthBackground {
-//     background-color: limegreen;
-//     height: 20px;
-//     width: 576px;
-// }
+#healthBackground {
+    background-color: limegreen;
+    height: 20px;
+    width: 576px;
+}
 
 #enemyHealth {
     position: absolute;
@@ -59,18 +59,26 @@ html{
         color: white;
         align-items: center;
         justify-content: center;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+        // top: 0;
+        // right: 0;
+        // bottom: 0;
+        // left: 0;
         display: none;
         font-size: 40px;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Helvetica, sans-serif;
         text-shadow:
             0.07em 0 black,
             0 0.07em black,
             -0.07em 0 black,
             0 -0.07em black;
+}
+#displayResults {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 40px;
+  font-family: Helvetica, sans-serif;
 }
 
 #instructions1 {

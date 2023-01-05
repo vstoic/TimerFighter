@@ -9,30 +9,15 @@
     <link rel="stylesheet" href="src/styles/reset.scss" />
     <script src="dist/main.js"></script>
     <title>Timer Fighter</title>
-    <h1 id="gameTitle">Timer Fighter!</h1>
-    <!-- timer -->
-    <h2 id="timer"></h2>
+    <h1 class="title">Timer Fighter!</h1>
+    <h2 class="timer"></h2>
+    <div id="health-bar" >  
+        <div id="botHealth" ></div>
+    </div>
 </head>
 <body>
-    <!-- NEED TO MOVE ALL THIS INTO A SCSS FILE -->
-    <!-- red container div -->
     <div id="mainContainer" >
-        <!-- smaller red container div -->
-        <div id="smallContainer" >
-            <!-- player health
-            <div id="playerHealth" style=" position: relative; height: 20px; width: 100%; display: flex; justify-content: flex-end;">
-                <div style="background-color: limegreen; height: 20px; width: 100%;"></div>
-                <div id="player-health"; style="position: absolute; background: blue; top: 0; right: 0; bottom: 0; width: 100%;"></div>
-            </div> -->
-            <!-- enemy health -->
-            <div id="enemyHealthMain" >  
-                <div id="healthBackground" ></div>
-                <div id="enemyHealth" ></div>
-            </div>
-        </div>
-        <!-- tie -->
-        <div id="displayTie" >Tie</div>
-        <!-- NEED TO MOVE ALL THIS INTO A SCSS FILE -->
+        <div id="displayResults"></div>
         <canvas id="timer-fighter" height="1024" width="576"></canvas>
         <p id="instructions1">WASD to move player</p>
         <p id="instructions2">"," to attack</p>
