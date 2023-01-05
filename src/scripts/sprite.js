@@ -36,6 +36,13 @@ export default class Sprite {
           this.image.height * this.scale
           )
   }
+
+    drawHealthBar() {
+        this.c.fillRect(this.position.x, this.position.y - 20, 70, 10)
+        this.c.fillStyle = "red";
+    }
+
+
   // if the frames is less than the max frame then add one. 
   //if it is at max frames then loop back to the start.
   animateFrames() {
@@ -48,6 +55,7 @@ export default class Sprite {
           }
       }
   }
+  
   //draws the script and adds a frame 
   update() {
       this.draw()

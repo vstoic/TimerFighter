@@ -18,7 +18,7 @@ export default class Bot extends Sprite {
     this.height = 65;
     this.lastKey = "";
     this.isAttacking;
-    this.health = 100;
+    this.health = obj.health;
     this.framesCurrent = 0;
     this.framesElapsed = 0;
     this.framesHold = 15;
@@ -34,7 +34,17 @@ export default class Bot extends Sprite {
       width: 65,
       height: 25,
     };
-    //this sets the sprite to the new object/hash
+    this.healthBar = {
+      position: {
+        x: this.position.x,
+        y: this.position.y,
+      },
+      offset: obj.attackOffset,
+      width: 50,
+      height: 50,
+      color: "red",
+    };
+    //this sets  the sprite to the new object/hash
 
     for (const sprite in this.sprites) {
       this.sprites[sprite].image = new Image();
@@ -44,10 +54,14 @@ export default class Bot extends Sprite {
   //the update method adds the drop speed(gravity) to y for each time the frame is loaded through draw
   update() {
     this.draw();
+    this.drawHealthBar();
     this.animateFrames();
     //sets the position of the attack box to the characters position
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y;
+
+    this.healthBar.position.x = this.position.x + this.healthBar.offset.x;
+    this.healthBar.position.y = this.position.y;
 
     this.position.y += this.velocity.y;
     this.position.x += this.velocity.x;
@@ -70,10 +84,9 @@ export default class Bot extends Sprite {
       this.playerSwitchSprite("punchLeft");
     }
     this.isAttacking = true;
-    // setTimeout(() => {
-    //     this.isAttacking = false
-    // }, 100)
   }
+
+  
   playerSwitchSprite(sprites) {
     if (
       this.image === this.sprites.punchRight.image &&
