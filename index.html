@@ -10,18 +10,19 @@
     <script src="dist/main.js"></script>
     <title>Timer Fighter</title>
     <h1 class="title">Timer Fighter!</h1>
-    <h2 class="timer"></h2>
-    <h2 class="kill-count"></h2>
-    <div id="health-bar" >  
-        <div id="botHealth" ></div>
+    <div class="time-score">
+        <h2 class="timer"></h2>
+        <h2 class="kill-count"></h2>
     </div>
 </head>
 <body>
     <div id="mainContainer" >
         <div id="displayResults"></div>
-        <canvas id="timer-fighter" height="1024" width="576"></canvas>
-        <p id="instructions1">WASD to move player</p>
-        <p id="instructions2">"," to attack</p>
+        <canvas id="timer-fighter"></canvas>
+        <div class="instructions">
+            <p id="instructions1">WASD to move player</p>
+            <p id="instructions2">"," to attack</p>
+        </div>
     </div>
 </body>
 </html>

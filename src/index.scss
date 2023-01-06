@@ -1,5 +1,8 @@
 html{
-    background-color: black;
+    background-color: white;
+    background-image: url('https://wallpapercave.com/wp/wp8794617.jpg');
+    background-position: center;
+    background-size: cover;
 }
 
 .title {
@@ -9,27 +12,17 @@ html{
     font-family: Arial, Helvetica, sans-serif;
     align-items: center;
     justify-content: center;
+    margin: 2px;
 }
+.time-score {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
 
-#mainContainer {
-    width: 100%;
-    text-align: center;
-    display: inline;
-    position: relative;
-    display: inline-block;
-    justify-content: space-evenly;
 }
-
-#smallContainer {
-    position: absolute;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    padding: 0 px;
-}
-
 .timer {
-        background-color: black;
+        // background-color: black;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -38,7 +31,7 @@ html{
         color: white;
 }
 .kill-count {
-        background-color: black;
+        // background-color: black;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -46,50 +39,44 @@ html{
         font-family: Arial, Helvetica, sans-serif;
         color: white;
 }
-
-#healthBackground {
-    background-color: limegreen;
-    height: 20px;
-    width: 576px;
+#mainContainer {
+    width: 100%;
+    text-align: center;
+    display: inline;
+    position: relative;
+    display: inline-block;
+    justify-content: space-evenly;
 }
-
-#enemyHealth {
-    position: absolute;
-    background: red;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 10;
-    width: 576px;
-}
-
-#displayTie {
-    position: absolute;
-        color: white;
-        align-items: center;
-        justify-content: center;
-        // top: 0;
-        // right: 0;
-        // bottom: 0;
-        // left: 0;
-        display: none;
-        font-size: 40px;
-        font-family: Helvetica, sans-serif;
-        text-shadow:
-            0.07em 0 black,
-            0 0.07em black,
-            -0.07em 0 black,
-            0 -0.07em black;
+#timer-fighter {
+  border-radius: 10px;
+  border: 4px solid rgb(72, 72, 72);
+  height: "1024"; 
+  width: "576";
 }
 #displayResults {
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
+  position: absolute;
+  top: 40%;
+  left: 45%;
   font-size: 40px;
   font-family: Helvetica, sans-serif;
+  text-shadow:
+            0.07em 0 black,
+            0 0.07em black,
+            -0.07em 0 black,
+            0 -0.07em black;
 }
-
+.instructions {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
 #instructions1 {
     color: white;
     font-family: 'Courier New', monospace;
