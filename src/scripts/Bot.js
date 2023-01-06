@@ -41,8 +41,7 @@ export default class Bot extends Sprite {
       },
       offset: obj.attackOffset,
       width: 50,
-      height: 50,
-      color: "red",
+      height: 50
     };
     //this sets  the sprite to the new object/hash
 
@@ -55,6 +54,8 @@ export default class Bot extends Sprite {
   update() {
     this.draw();
     this.drawHealthBar();
+    this.drawHealthBarBorder();
+
     this.animateFrames();
     //sets the position of the attack box to the characters position
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
@@ -86,7 +87,7 @@ export default class Bot extends Sprite {
     this.isAttacking = true;
   }
 
-  
+
   playerSwitchSprite(sprites) {
     if (
       this.image === this.sprites.punchRight.image &&

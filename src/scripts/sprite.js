@@ -38,8 +38,22 @@ export default class Sprite {
   }
 
     drawHealthBar() {
-        this.c.fillRect(this.position.x, this.position.y - 20, 70, 10)
-        this.c.fillStyle = "red";
+        // let barColors = ['red', 'orange', 'yellow', 'green'];
+        // let randomIdx = Math.floor(Math.random() * barColors.length);
+        let barWidth = Math.min((this.health / 71) * 70, 71);
+        // x does not change (its the starting point on x axis)
+        // y does not change either (its the starting point on y axis)
+        // width should be scaled from the health of the player
+        // height should be 10 doesnt change 
+        this.c.fillRect(this.position.x, this.position.y - 20, 72, 7)
+        this.c.fillStyle = 'red';
+        this.c.fillRect(this.position.x, this.position.y - 20, barWidth, 7)
+        this.c.fillStyle = 'yellow'; 
+    }
+    
+    drawHealthBarBorder() {
+    
+    
     }
 
 
@@ -55,7 +69,7 @@ export default class Sprite {
           }
       }
   }
-  
+
   //draws the script and adds a frame 
   update() {
       this.draw()

@@ -348,7 +348,7 @@ export default class Game {
     // and takes away a health width % of the enimmy health id in scss
     if (this.collisionBox() && this.player.isAttacking) {
       this.player.isAttacking = false;
-      this.enemy.health -= 5;
+      this.enemy.health -= 3;
       // document.querySelector('#enemyHealth').style.width = this.enemy.health + '%'
       // console.log('player attack successful');
     }
@@ -442,7 +442,7 @@ export default class Game {
               },
               gravity: this.gravity,
               frameHold: 10,
-              health: 100,
+              health: 100 + (10 * this.killCount),
             });;
 
     }
