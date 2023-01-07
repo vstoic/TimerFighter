@@ -1,4 +1,5 @@
 import Game from './scripts/Game.js'
+import Sprite from './scripts/Sprite.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -8,7 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.height = 576;
     // debugger
     let game = new Game(c, canvas, canvas.width, canvas.height);
-    game.animate()
+    game.animateGame();
+    game.animatePlayer();
+    game.animateBot();
     // create model function for character select and time select
-    game.decreaseTimer(10)
+    game.decreaseTimer(10);
 })
