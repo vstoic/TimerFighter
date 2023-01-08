@@ -99,69 +99,68 @@ export default class Game {
       canvas: this.canvas,
       canvasWidth: this.canvasWidth,
       canvasHeight: this.canvasHeight,
-      imageSrc: "src/assets/Krillin/idleRight.png",
+      imageSrc: "src/assets/Krillin/idle/idleRight.png",
       sprites: {
         idleRight: {
-          imageSrc: "src/assets/Krillin/idleRight.png",
+          imageSrc: "src/assets/Krillin/idle/idleRight.png",
           // scale: 0.75,
           framesMax: 4,
         },
         idleLeft: {
-          imageSrc: "src/assets/Krillin/idleLeft.png",
-          // scale: 0.75,
+          imageSrc: "src/assets/Krillin/idle/idleLeft.png",
           framesMax: 4,
         },
         runRight: {
-          imageSrc: "src/assets/Krillin/runRight.png",
+          imageSrc: "src/assets/Krillin/run/runRight.png",
           // scale: 0.75,
           framesMax: 4,
           // image: new Image()
         },
         runLeft: {
-          imageSrc: "src/assets/Krillin/runLeft.png",
+          imageSrc: "src/assets/Krillin/run/runLeft.png",
           // scale: 0.75,
           framesMax: 4,
           // image: new Image()
         },
         jump: {
-          imageSrc: "src/assets/Krillin/jump.png",
+          imageSrc: "src/assets/Krillin//jump/jump.png",
           // scale: 0.75,
           framesMax: 4,
           // image: new Image()
         },
         drop: {
-          imageSrc: "src/assets/Krillin/drop.png",
+          imageSrc: "src/assets/Krillin/jump/drop.png",
           // scale: 0.75,
           framesMax: 2,
           // image: new Image()
         },
         jumpLeft: {
-          imageSrc: "src/assets/Krillin/jumpLeft.png",
+          imageSrc: "src/assets/Krillin/jump/jumpLeft.png",
           // scale: 0.75,
           framesMax: 2,
           // image: new Image()
         },
         dropLeft: {
-          imageSrc: "src/assets/Krillin/dropLeft.png",
+          imageSrc: "src/assets/Krillin/jump/dropLeft.png",
           // scale: 0.75,
           framesMax: 2,
           // image: new Image()
         },
         punchRight: {
-          imageSrc: "src/assets/Krillin/punchRight.png",
-          // scale: 0.6,
-          framesMax: 3.7,
+          imageSrc: "src/assets/Krillin/punch/punchRight.png",
+          scale: 0.6,
+          framesMax: 3.665,
           // image: new Image()
         },
         punchLeft: {
-          imageSrc: "src/assets/Krillin/punchLeft.png",
-          // scale: 1,
-          framesMax: 3.8,
+          imageSrc: "src/assets/Krillin/punch/punchLeft.png",
+        //   scale: 15,
+          framesMax: 4,
           // image: new Image()
         },
       },
       position: {
-        x: 50,
+        x: 200,
         y: 400,
       },
       velocity: {
@@ -187,7 +186,7 @@ export default class Game {
         x: 0,
         y: 0,
       },
-      imageSrc: "src/assets/village_2 copy.png",
+      imageSrc: "src/assets/village/villageBackground.png",
       scale: 1,
       framesMax: 1,
       offset: {
@@ -201,7 +200,7 @@ export default class Game {
         x: 351,
         y: 111,
       },
-      imageSrc: "src/assets/spritesheet.png",
+      imageSrc: "src/assets//village/awning.png",
       scale: 1.032,
       framesMax: 3,
       offset: {

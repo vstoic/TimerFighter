@@ -69,10 +69,8 @@ export default class Krillin extends Sprite {
       this.playerSwitchSprite("punchLeft");
     }
     this.isAttacking = true;
-    // setTimeout(() => {
-    //     this.isAttacking = false
-    // }, 100)
   }
+  
   playerSwitchSprite(sprites) {
     if (
       this.image === this.sprites.punchRight.image &&
