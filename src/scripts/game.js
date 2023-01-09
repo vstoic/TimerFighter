@@ -9,7 +9,7 @@ import Krillin from "./Krillin.js";
 export default class Game {
   constructor(c, canvas, width, height) {
     // debugger
-    const decreaseTimer = this.decreaseTimer.bind(this);
+    // const decreaseTimer = this.decreaseTimer.bind(this);
 
     this.c = c;
     this.canvas = canvas;
@@ -27,7 +27,7 @@ export default class Game {
       sprites: {
         idleRight: {
           imageSrc: "src/assets/Kakashi/idleRight.png",
-        //   scale: 0.75,
+          //   scale: 0.75,
           framesMax: 4,
         },
         idleLeft: {
@@ -150,14 +150,26 @@ export default class Game {
         },
         punchRight: {
           imageSrc: "src/assets/Krillin/punch/punchRight.png",
-          scale: 1.25,
+          scale: 1.28,
           framesMax: 4,
           image: new Image(),
         },
         punchLeft: {
           imageSrc: "src/assets/Krillin/punch/punchLeft.png",
-          scale: 1.25,
+          scale: 1.28,
           framesMax: 4,
+          image: new Image(),
+        },
+        kickRight: {
+          imageSrc: "src/assets/Krillin/kick/kickRight.png",
+          scale: 1.28,
+          framesMax: 7,
+          image: new Image(),
+        },
+        kickLeft: {
+          imageSrc: "src/assets/Krillin/kick/kickLeft.png",
+          scale: 1.28,
+          framesMax: 7,
           image: new Image(),
         },
       },
@@ -171,7 +183,7 @@ export default class Game {
       },
       offset: {
         x: 0,
-        y: -28,
+        y: -21,
       },
       imageSrc: "src/assets/Krillin/idle/idleRight.png",
       scale: 0.65,
@@ -318,133 +330,133 @@ export default class Game {
       // console.log('player attack successful');
     }
     window.requestAnimationFrame(this.animatePlayer.bind(this));
-  };
+  }
 
-    animateBot() {
-      this.enemy.update();
-      this.enemy.velocity.x = 0;
-      if (this.keys.ArrowLeft.pressed && this.enemy.lastKey === "ArrowLeft") {
-        this.enemy.enemySwitchSprite("runLeft");
-        this.enemy.velocity.x = -2;
-      } else if (
-        this.keys.ArrowRight.pressed &&
-        this.enemy.lastKey === "ArrowRight"
-      ) {
-        this.enemy.enemySwitchSprite("runRight");
-        this.enemy.velocity.x = 2;
-      } else if (
-        this.enemy.lastKey === "ArrowRight" &&
-        this.enemy.velocity.x === 0
-      ) {
-        this.enemy.enemySwitchSprite("idleRight");
-      } else if (
-        this.enemy.lastKey === "ArrowLeft" &&
-        this.enemy.velocity.x === 0
-      ) {
-        this.enemy.enemySwitchSprite("idleLeft");
-      }
-      if (this.enemy.velocity.y < 0 && this.enemy.lastKey === "ArrowLeft") {
-        this.enemy.enemySwitchSprite("jumpLeft");
-      } else if (
-        this.enemy.velocity.y > 0 &&
-        this.enemy.lastKey === "ArrowLeft"
-      ) {
-        this.enemy.enemySwitchSprite("dropLeft");
-      }
-      if (this.enemy.velocity.y < 0 && this.enemy.lastKey === "ArrowRight") {
-        this.enemy.enemySwitchSprite("jump");
-      } else if (
-        this.enemy.velocity.y > 0 &&
-        this.enemy.lastKey === "ArrowRight"
-      ) {
-        this.enemy.enemySwitchSprite("drop");
-      }
-      if (this.collisionBox() && this.enemy.isAttacking) {
-        this.enemy.isAttacking = false;
-        this.player.health -= 10;
-      }
-      //spawn a new this.enemy when hp turns 0 and increases killcount
-      if (this.enemy.health <= 0) {
-        this.killCount += 1;
-        this.enemy = new Bot({
-          c: this.c,
-          canvas: this.canvas,
-          canvasWidth: this.canvasWidth,
-          canvasHeight: this.canvasHeight,
-          imageSrc: "src/assets/kakashi/idleLeft.png",
-          sprites: {
-            idleRight: {
-              imageSrc: "src/assets/Kakashi/idleRight.png",
-              // scale: 0.75,
-              framesMax: 4,
-            },
-            idleLeft: {
-              imageSrc: "src/assets/kakashi/idleLeft.png",
-              // scale: 0.75,
-              framesMax: 4,
-            },
-            runRight: {
-              imageSrc: "src/assets/kakashi/runRight.png",
-              // scale: 0.75,
-              framesMax: 6,
-              // image: new Image()
-            },
-            runLeft: {
-              imageSrc: "src/assets/kakashi/runLeft.png",
-              // scale: 0.75,
-              framesMax: 6,
-              // image: new Image()
-            },
-            jump: {
-              imageSrc: "src/assets/kakashi/jumpRight.png",
-              // scale: 0.75,
-              framesMax: 2,
-              // image: new Image()
-            },
-            drop: {
-              imageSrc: "src/assets/kakashi/dropRight.png",
-              // scale: 0.75,
-              framesMax: 2,
-              // image: new Image()
-            },
-            jumpLeft: {
-              imageSrc: "src/assets/kakashi/jumpLeft.png",
-              // scale: 0.75,
-              framesMax: 2,
-              // image: new Image()
-            },
-            dropLeft: {
-              imageSrc: "src/assets/kakashi/dropLeft.png",
-              // scale: 0.75,
-              framesMax: 2,
-              // image: new Image()
-            },
-          },
-          position: {
-            x: 800,
-            y: 400,
-          },
-          velocity: {
-            x: 0,
-            y: 0,
-          },
-          offset: {
-            x: 0,
-            y: 12,
-          },
-          scale: 1.15,
-          framesMax: 4,
-          attackOffset: {
-            x: 0,
-            y: 0,
-          },
-          gravity: this.gravity,
-          frameHold: 10,
-          health: 100 + 10 * this.killCount,
-        });
-      }
-      window.requestAnimationFrame(this.animateBot.bind(this));
+  animateBot() {
+    this.enemy.update();
+    this.enemy.velocity.x = 0;
+    if (this.keys.ArrowLeft.pressed && this.enemy.lastKey === "ArrowLeft") {
+      this.enemy.enemySwitchSprite("runLeft");
+      this.enemy.velocity.x = -2;
+    } else if (
+      this.keys.ArrowRight.pressed &&
+      this.enemy.lastKey === "ArrowRight"
+    ) {
+      this.enemy.enemySwitchSprite("runRight");
+      this.enemy.velocity.x = 2;
+    } else if (
+      this.enemy.lastKey === "ArrowRight" &&
+      this.enemy.velocity.x === 0
+    ) {
+      this.enemy.enemySwitchSprite("idleRight");
+    } else if (
+      this.enemy.lastKey === "ArrowLeft" &&
+      this.enemy.velocity.x === 0
+    ) {
+      this.enemy.enemySwitchSprite("idleLeft");
     }
+    if (this.enemy.velocity.y < 0 && this.enemy.lastKey === "ArrowLeft") {
+      this.enemy.enemySwitchSprite("jumpLeft");
+    } else if (
+      this.enemy.velocity.y > 0 &&
+      this.enemy.lastKey === "ArrowLeft"
+    ) {
+      this.enemy.enemySwitchSprite("dropLeft");
+    }
+    if (this.enemy.velocity.y < 0 && this.enemy.lastKey === "ArrowRight") {
+      this.enemy.enemySwitchSprite("jump");
+    } else if (
+      this.enemy.velocity.y > 0 &&
+      this.enemy.lastKey === "ArrowRight"
+    ) {
+      this.enemy.enemySwitchSprite("drop");
+    }
+    if (this.collisionBox() && this.enemy.isAttacking) {
+      this.enemy.isAttacking = false;
+      this.player.health -= 10;
+    }
+    //spawn a new this.enemy when hp turns 0 and increases killcount
+    if (this.enemy.health <= 0) {
+      this.killCount += 1;
+      this.enemy = new Bot({
+        c: this.c,
+        canvas: this.canvas,
+        canvasWidth: this.canvasWidth,
+        canvasHeight: this.canvasHeight,
+        imageSrc: "src/assets/kakashi/idleLeft.png",
+        sprites: {
+          idleRight: {
+            imageSrc: "src/assets/Kakashi/idleRight.png",
+            // scale: 0.75,
+            framesMax: 4,
+          },
+          idleLeft: {
+            imageSrc: "src/assets/kakashi/idleLeft.png",
+            // scale: 0.75,
+            framesMax: 4,
+          },
+          runRight: {
+            imageSrc: "src/assets/kakashi/runRight.png",
+            // scale: 0.75,
+            framesMax: 6,
+            // image: new Image()
+          },
+          runLeft: {
+            imageSrc: "src/assets/kakashi/runLeft.png",
+            // scale: 0.75,
+            framesMax: 6,
+            // image: new Image()
+          },
+          jump: {
+            imageSrc: "src/assets/kakashi/jumpRight.png",
+            // scale: 0.75,
+            framesMax: 2,
+            // image: new Image()
+          },
+          drop: {
+            imageSrc: "src/assets/kakashi/dropRight.png",
+            // scale: 0.75,
+            framesMax: 2,
+            // image: new Image()
+          },
+          jumpLeft: {
+            imageSrc: "src/assets/kakashi/jumpLeft.png",
+            // scale: 0.75,
+            framesMax: 2,
+            // image: new Image()
+          },
+          dropLeft: {
+            imageSrc: "src/assets/kakashi/dropLeft.png",
+            // scale: 0.75,
+            framesMax: 2,
+            // image: new Image()
+          },
+        },
+        position: {
+          x: 800,
+          y: 400,
+        },
+        velocity: {
+          x: 0,
+          y: 0,
+        },
+        offset: {
+          x: 0,
+          y: 12,
+        },
+        scale: 1.15,
+        framesMax: 4,
+        attackOffset: {
+          x: 0,
+          y: 0,
+        },
+        gravity: this.gravity,
+        frameHold: 10,
+        health: 100 + 10 * this.killCount,
+      });
+    }
+    window.requestAnimationFrame(this.animateBot.bind(this));
+  }
 
   eventListener() {
     window.addEventListener("keydown", (event) => {
@@ -461,7 +473,10 @@ export default class Game {
           if (this.player.velocity.y === 0) this.player.velocity.y = -15;
           break;
         case ",":
-          this.player.attack();
+          this.player.punch();
+          break;
+        case ".":
+          this.player.kick();
           break;
         case "ArrowRight":
           this.keys.ArrowRight.pressed = true;

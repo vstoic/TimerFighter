@@ -62,15 +62,23 @@ export default class Krillin extends Sprite {
     }
   }
   // when invoked attacking is character/bots isAttacking value set to true for 100ms then changed back to false
-  attack() {
+  punch() {
     if (this.image === this.sprites.idleRight.image) {
       this.playerSwitchSprite("punchRight");
     } else if (this.image === this.sprites.idleLeft.image) {
       this.playerSwitchSprite("punchLeft");
     }
     this.isAttacking = true;
-  }
-  
+  };
+  kick() {
+    if (this.image === this.sprites.idleRight.image) {
+      this.playerSwitchSprite("kickRight");
+    } else if (this.image === this.sprites.idleLeft.image) {
+      this.playerSwitchSprite("kickLeft");
+    }
+    this.isAttacking = true;
+  };
+
   playerSwitchSprite(sprites) {
     if (
       this.image === this.sprites.punchRight.image &&
@@ -81,6 +89,17 @@ export default class Krillin extends Sprite {
     if (
       this.image === this.sprites.punchLeft.image &&
       this.framesCurrent < this.sprites.punchLeft.framesMax - 1
+    )
+      return;
+    if (
+      this.image === this.sprites.kickRight.image &&
+      this.framesCurrent < this.sprites.kickRight.framesMax - 1
+    )
+      return;
+
+    if (
+      this.image === this.sprites.kickLeft.image &&
+      this.framesCurrent < this.sprites.kickLeft.framesMax - 1
     )
       return;
 
@@ -171,79 +190,95 @@ export default class Krillin extends Sprite {
           this.framesCurrent = 0;
         }
         break;
+        case "kickRight":
+        if (this.image !== this.sprites.kickRight.image) {
+          this.image = this.sprites.kickRight.image;
+          this.framesMax = this.sprites.kickRight.framesMax;
+          this.scale = this.sprites.kickRight.scale;
+          this.framesCurrent = 0;
+        }
+        break;
+      case "kickLeft":
+        if (this.image !== this.sprites.kickLeft.image) {
+          this.image = this.sprites.kickLeft.image;
+          this.framesMax = this.sprites.kickLeft.framesMax;
+          this.scale = this.sprites.kickLeft.scale;
+          this.framesCurrent = 0;
+        }
+        break;
     }
   }
 
-  enemySwitchSprite(sprites) {
-    switch (sprites) {
-      case "idleRight":
-        if (this.image !== this.sprites.idleRight.image) {
-          this.image = this.sprites.idleRight.image;
-          this.framesMax = this.sprites.idleRight.framesMax;
-          this.framesCurrent = 0;
-        }
-        break;
-      case "idleLeft":
-        if (this.image !== this.sprites.idleLeft.image) {
-          this.image = this.sprites.idleLeft.image;
-          this.framesMax = this.sprites.idleLeft.framesMax;
-          this.framesCurrent = 0;
-        }
-        break;
-      case "runRight":
-        if (this.image !== this.sprites.runRight.image) {
-          this.image = this.sprites.runRight.image;
-          this.framesMax = this.sprites.runRight.framesMax;
-          this.framesCurrent = 0;
-        }
-        break;
-      case "runLeft":
-        if (this.image !== this.sprites.runLeft.image) {
-          this.image = this.sprites.runLeft.image;
-          this.framesMax = this.sprites.runLeft.framesMax;
-          this.framesCurrent = 0;
-        }
-        break;
-      case "jump":
-        if (
-          this.image !== this.sprites.jump.image &&
-          this.lastKey === "ArrowRight"
-        ) {
-          this.image = this.sprites.jump.image;
-          this.framesMax = this.sprites.jump.framesMax;
-          this.framesCurrent = 0;
-        }
-        break;
-      case "drop":
-        if (
-          this.image !== this.sprites.drop.image &&
-          this.lastKey === "ArrowRight"
-        ) {
-          this.image = this.sprites.drop.image;
-          this.framesMax = this.sprites.drop.framesMax;
-          this.framesCurrent = 0;
-        }
-        break;
-      case "jumpLeft":
-        if (
-          this.image !== this.sprites.jumpLeft.image &&
-          this.lastKey === "ArrowLeft"
-        ) {
-          this.image = this.sprites.jumpLeft.image;
-          this.framesMax = this.sprites.jumpLeft.framesMax;
-          this.framesCurrent = 0;
-        }
-        break;
-      case "dropLeft":
-        if (
-          this.image !== this.sprites.dropLeft.image &&
-          this.lastKey === "ArrowLeft"
-        ) {
-          this.image = this.sprites.dropLeft.image;
-          this.framesMax = this.sprites.dropLeft.framesMax;
-          this.framesCurrent = 0;
-        }
-        break;
-    }
-  }
+  // enemySwitchSprite(sprites) {
+  //   switch (sprites) {
+  //     case "idleRight":
+  //       if (this.image !== this.sprites.idleRight.image) {
+  //         this.image = this.sprites.idleRight.image;
+  //         this.framesMax = this.sprites.idleRight.framesMax;
+  //         this.framesCurrent = 0;
+  //       }
+  //       break;
+  //     case "idleLeft":
+  //       if (this.image !== this.sprites.idleLeft.image) {
+  //         this.image = this.sprites.idleLeft.image;
+  //         this.framesMax = this.sprites.idleLeft.framesMax;
+  //         this.framesCurrent = 0;
+  //       }
+  //       break;
+  //     case "runRight":
+  //       if (this.image !== this.sprites.runRight.image) {
+  //         this.image = this.sprites.runRight.image;
+  //         this.framesMax = this.sprites.runRight.framesMax;
+  //         this.framesCurrent = 0;
+  //       }
+  //       break;
+  //     case "runLeft":
+  //       if (this.image !== this.sprites.runLeft.image) {
+  //         this.image = this.sprites.runLeft.image;
+  //         this.framesMax = this.sprites.runLeft.framesMax;
+  //         this.framesCurrent = 0;
+  //       }
+  //       break;
+  //     case "jump":
+  //       if (
+  //         this.image !== this.sprites.jump.image &&
+  //         this.lastKey === "ArrowRight"
+  //       ) {
+  //         this.image = this.sprites.jump.image;
+  //         this.framesMax = this.sprites.jump.framesMax;
+  //         this.framesCurrent = 0;
+  //       }
+  //       break;
+  //     case "drop":
+  //       if (
+  //         this.image !== this.sprites.drop.image &&
+  //         this.lastKey === "ArrowRight"
+  //       ) {
+  //         this.image = this.sprites.drop.image;
+  //         this.framesMax = this.sprites.drop.framesMax;
+  //         this.framesCurrent = 0;
+  //       }
+  //       break;
+  //     case "jumpLeft":
+  //       if (
+  //         this.image !== this.sprites.jumpLeft.image &&
+  //         this.lastKey === "ArrowLeft"
+  //       ) {
+  //         this.image = this.sprites.jumpLeft.image;
+  //         this.framesMax = this.sprites.jumpLeft.framesMax;
+  //         this.framesCurrent = 0;
+  //       }
+  //       break;
+  //     case "dropLeft":
+  //       if (
+  //         this.image !== this.sprites.dropLeft.image &&
+  //         this.lastKey === "ArrowLeft"
+  //       ) {
+  //         this.image = this.sprites.dropLeft.image;
+  //         this.framesMax = this.sprites.dropLeft.framesMax;
+  //         this.framesCurrent = 0;
+  //       }
+  //       break;
+  //   }
+  // }
 }
