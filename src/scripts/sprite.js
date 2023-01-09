@@ -3,9 +3,9 @@
     //also invokes the draw() function
     // frames elapsed is for how many frames the game is going through
     //frames hold is how many frames elapsed until you loop the current frame
-    //c, position, imageSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 }
 export default class Sprite {
   constructor( obj ) {
+    console.log(obj)
       this.c = obj.c
       this.position = obj.position
       this.width = 50
@@ -19,12 +19,17 @@ export default class Sprite {
       this.framesHold = 150
       //offset to recenter sprite
       this.offset = obj.offset
+
+      
   }
   // takes in image, and splits the image into the max number of frames then multiply
   //it by the number of frames. then scales the image
   //we subtract x, y offset passed in when creating new player because we want to improve position of sprites with large whitespace
+//   context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
   draw() {
+    console.log()
       this.c.drawImage(
+
           this.image,
           this.framesCurrent * (this.image.width / this.framesMax),
           0,
@@ -49,11 +54,6 @@ export default class Sprite {
         this.c.fillStyle = 'red';
         this.c.fillRect(this.position.x, this.position.y - 20, barWidth, 7)
         this.c.fillStyle = 'yellow'; 
-    }
-    
-    drawHealthBarBorder() {
-    
-    
     }
 
 

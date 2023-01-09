@@ -54,7 +54,7 @@ export default class Bot extends Sprite {
   update() {
     this.draw();
     this.drawHealthBar();
-    this.drawHealthBarBorder();
+    // this.drawHealthBarBorder();
 
     this.animateFrames();
     //sets the position of the attack box to the characters position

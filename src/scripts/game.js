@@ -27,7 +27,7 @@ export default class Game {
       sprites: {
         idleRight: {
           imageSrc: "src/assets/Kakashi/idleRight.png",
-          // scale: 0.75,
+        //   scale: 0.75,
           framesMax: 4,
         },
         idleLeft: {
@@ -99,64 +99,66 @@ export default class Game {
       canvas: this.canvas,
       canvasWidth: this.canvasWidth,
       canvasHeight: this.canvasHeight,
-      imageSrc: "src/assets/Krillin/idle/idleRight.png",
       sprites: {
         idleRight: {
           imageSrc: "src/assets/Krillin/idle/idleRight.png",
-          // scale: 0.75,
+          scale: 0.65,
           framesMax: 4,
+          image: new Image(),
         },
         idleLeft: {
           imageSrc: "src/assets/Krillin/idle/idleLeft.png",
+          scale: 0.65,
           framesMax: 4,
+          image: new Image(),
         },
         runRight: {
           imageSrc: "src/assets/Krillin/run/runRight.png",
-          // scale: 0.75,
+          scale: 0.65,
           framesMax: 4,
-          // image: new Image()
+          image: new Image(),
         },
         runLeft: {
           imageSrc: "src/assets/Krillin/run/runLeft.png",
-          // scale: 0.75,
+          scale: 0.65,
           framesMax: 4,
-          // image: new Image()
+          image: new Image(),
         },
         jump: {
           imageSrc: "src/assets/Krillin//jump/jump.png",
-          // scale: 0.75,
+          scale: 0.65,
           framesMax: 4,
-          // image: new Image()
+          image: new Image(),
         },
         drop: {
           imageSrc: "src/assets/Krillin/jump/drop.png",
-          // scale: 0.75,
+          scale: 0.65,
           framesMax: 2,
-          // image: new Image()
+          image: new Image(),
         },
         jumpLeft: {
           imageSrc: "src/assets/Krillin/jump/jumpLeft.png",
-          // scale: 0.75,
+          scale: 0.65,
           framesMax: 2,
-          // image: new Image()
+          image: new Image(),
         },
         dropLeft: {
           imageSrc: "src/assets/Krillin/jump/dropLeft.png",
-          // scale: 0.75,
+          scale: 0.65,
           framesMax: 2,
-          // image: new Image()
+          image: new Image(),
         },
         punchRight: {
           imageSrc: "src/assets/Krillin/punch/punchRight.png",
-          scale: 0.6,
-          framesMax: 3.665,
-          // image: new Image()
+          scale: 1.25,
+          framesMax: 4,
+          image: new Image(),
         },
         punchLeft: {
           imageSrc: "src/assets/Krillin/punch/punchLeft.png",
-        //   scale: 15,
+          scale: 1.25,
           framesMax: 4,
-          // image: new Image()
+          image: new Image(),
         },
       },
       position: {
@@ -171,7 +173,8 @@ export default class Game {
         x: 0,
         y: -28,
       },
-      scale: 0.6,
+      imageSrc: "src/assets/Krillin/idle/idleRight.png",
+      scale: 0.65,
       framesMax: 4,
       attackOffset: {
         x: 0,

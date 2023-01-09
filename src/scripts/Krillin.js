@@ -89,6 +89,7 @@ export default class Krillin extends Sprite {
         if (this.image !== this.sprites.idleRight.image) {
           this.image = this.sprites.idleRight.image;
           this.framesMax = this.sprites.idleRight.framesMax;
+          this.scale = this.sprites.idleRight.scale;
           this.framesCurrent = 0;
         }
         break;
@@ -96,6 +97,7 @@ export default class Krillin extends Sprite {
         if (this.image !== this.sprites.idleLeft.image) {
           this.image = this.sprites.idleLeft.image;
           this.framesMax = this.sprites.idleLeft.framesMax;
+          this.scale = this.sprites.idleLeft.scale;
           this.framesCurrent = 0;
         }
         break;
@@ -103,6 +105,7 @@ export default class Krillin extends Sprite {
         if (this.image !== this.sprites.runRight.image) {
           this.image = this.sprites.runRight.image;
           this.framesMax = this.sprites.runRight.framesMax;
+          this.scale = this.sprites.runRight.scale;
           this.framesCurrent = 0;
         }
         break;
@@ -110,6 +113,7 @@ export default class Krillin extends Sprite {
         if (this.image !== this.sprites.runLeft.image) {
           this.image = this.sprites.runLeft.image;
           this.framesMax = this.sprites.runLeft.framesMax;
+          this.scale = this.sprites.runLeft.scale;
           this.framesCurrent = 0;
         }
         break;
@@ -117,6 +121,7 @@ export default class Krillin extends Sprite {
         if (this.image !== this.sprites.jump.image && this.lastKey === "d") {
           this.image = this.sprites.jump.image;
           this.framesMax = this.sprites.jump.framesMax;
+          this.scale = this.sprites.jump.scale;
           this.framesCurrent = 0;
         }
         break;
@@ -124,6 +129,7 @@ export default class Krillin extends Sprite {
         if (this.image !== this.sprites.drop.image && this.lastKey === "d") {
           this.image = this.sprites.drop.image;
           this.framesMax = this.sprites.drop.framesMax;
+          this.scale = this.sprites.drop.scale;
           this.framesCurrent = 0;
         }
         break;
@@ -134,6 +140,7 @@ export default class Krillin extends Sprite {
         ) {
           this.image = this.sprites.jumpLeft.image;
           this.framesMax = this.sprites.jumpLeft.framesMax;
+          this.scale = this.sprites.jumpLeft.scale;
           this.framesCurrent = 0;
         }
         break;
@@ -144,6 +151,7 @@ export default class Krillin extends Sprite {
         ) {
           this.image = this.sprites.dropLeft.image;
           this.framesMax = this.sprites.dropLeft.framesMax;
+          this.scale = this.sprites.dropLeft.scale;
           this.framesCurrent = 0;
         }
         break;
@@ -151,6 +159,7 @@ export default class Krillin extends Sprite {
         if (this.image !== this.sprites.punchRight.image) {
           this.image = this.sprites.punchRight.image;
           this.framesMax = this.sprites.punchRight.framesMax;
+          this.scale = this.sprites.punchRight.scale;
           this.framesCurrent = 0;
         }
         break;
@@ -158,6 +167,7 @@ export default class Krillin extends Sprite {
         if (this.image !== this.sprites.punchLeft.image) {
           this.image = this.sprites.punchLeft.image;
           this.framesMax = this.sprites.punchLeft.framesMax;
+          this.scale = this.sprites.punchLeft.scale;
           this.framesCurrent = 0;
         }
         break;
