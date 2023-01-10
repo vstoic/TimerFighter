@@ -105,72 +105,98 @@ export default class Game {
           scale: 0.65,
           framesMax: 4,
           image: new Image(),
+          framesHold: 15,
         },
         idleLeft: {
           imageSrc: "src/assets/Krillin/idle/idleLeft.png",
           scale: 0.65,
           framesMax: 4,
           image: new Image(),
+          framesHold: 15,
         },
         runRight: {
           imageSrc: "src/assets/Krillin/run/runRight.png",
           scale: 0.65,
           framesMax: 4,
           image: new Image(),
+          framesHold: 15,
         },
         runLeft: {
           imageSrc: "src/assets/Krillin/run/runLeft.png",
           scale: 0.65,
           framesMax: 4,
           image: new Image(),
+          framesHold: 15,
         },
         jump: {
           imageSrc: "src/assets/Krillin//jump/jump.png",
           scale: 0.65,
           framesMax: 4,
           image: new Image(),
+          framesHold: 15,
         },
         drop: {
           imageSrc: "src/assets/Krillin/jump/drop.png",
           scale: 0.65,
           framesMax: 2,
           image: new Image(),
+          framesHold: 15,
         },
         jumpLeft: {
           imageSrc: "src/assets/Krillin/jump/jumpLeft.png",
           scale: 0.65,
           framesMax: 2,
           image: new Image(),
+          framesHold: 15,
         },
         dropLeft: {
           imageSrc: "src/assets/Krillin/jump/dropLeft.png",
           scale: 0.65,
           framesMax: 2,
           image: new Image(),
+          framesHold: 15,
         },
         punchRight: {
           imageSrc: "src/assets/Krillin/punch/punchRight.png",
           scale: 1.28,
           framesMax: 4,
           image: new Image(),
+          framesHold: 15,
         },
         punchLeft: {
           imageSrc: "src/assets/Krillin/punch/punchLeft.png",
           scale: 1.28,
           framesMax: 4,
           image: new Image(),
+          framesHold: 15,
         },
         kickRight: {
           imageSrc: "src/assets/Krillin/kick/kickRight.png",
           scale: 1.28,
           framesMax: 7,
           image: new Image(),
+          framesHold: 9,
         },
         kickLeft: {
           imageSrc: "src/assets/Krillin/kick/kickLeft.png",
           scale: 1.28,
           framesMax: 7,
           image: new Image(),
+          framesHold: 9,
+        },
+        dashRight: {
+          imageSrc: "src/assets/Krillin/dash/dashRight.png",
+          scale: 1.28,
+          framesMax: 5,
+          image: new Image(),
+          framesHold: 9,
+        },
+        dashLeft: {
+          imageSrc: "src/assets/Krillin/dash/dashLeft.png",
+          scale: 1.28,
+          framesMax: 5,
+          image: new Image(),
+          framesHold: 1,
         },
       },
       position: {
@@ -242,6 +268,9 @@ export default class Game {
       ArrowUp: {
         pressed: false,
       },
+      // SpaceBar: {
+      // pressed: false,
+      // },
     };
     this.eventListener();
   }
@@ -478,19 +507,50 @@ export default class Game {
         case ".":
           this.player.kick();
           break;
-        case "ArrowRight":
-          this.keys.ArrowRight.pressed = true;
-          this.enemy.lastKey = "ArrowRight";
+        case " ":
+          this.player.dash();
+          setTimeout(() => {
+            if (this.player.velocity.x === 0 && this.player.lastKey == "d") {
+              this.player.velocity.x = 155;
+            } else if (
+              this.player.velocity.x === 0 &&
+              this.player.lastKey == "a"
+            ) {
+              this.player.velocity.x = -155;
+            }
+            5050;
+          });
           break;
-        case "ArrowLeft":
-          this.keys.ArrowLeft.pressed = true;
-          this.enemy.lastKey = "ArrowLeft";
+        // case "ArrowRight":
+        //   this.keys.ArrowRight.pressed = true;
+        //   this.enemy.lastKey = "ArrowRight";
+        //   break;
+        // case "ArrowLeft":
+        //   this.keys.ArrowLeft.pressed = true;
+        //   this.enemy.lastKey = "ArrowLeft";
+        //   break;
+        // case "ArrowUp":
+        //   if (this.enemy.velocity.y === 0) this.enemy.velocity.y = -15;
+        //   break;
+        // case "ArrowDown":
+        //   this.enemy.attack();
+        //   break;
+      }
+    });
+
+    //tried making a eventlistener for doubleclicking to dash but not working
+    window.addEventListener("dblclick", (event) => {
+      switch (event.key) {
+        case "z":
+          // this.keys.a.pressed = true;
+          this.player.punch();
+          // this.player.lastKey = "a";
           break;
-        case "ArrowUp":
-          if (this.enemy.velocity.y === 0) this.enemy.velocity.y = -15;
-          break;
-        case "ArrowDown":
-          this.enemy.attack();
+        case "c":
+          this.player.punch();
+          // this.keys.d.pressed = true;
+          // this.player.lastKey = "d";
+          // if (this.player.velocity.x === 0) this.player.velocity.x = -5;
           break;
       }
     });
@@ -505,20 +565,23 @@ export default class Game {
         case "w":
           this.keys.w.pressed = false;
           break;
+        // case "space":
+        //   this.keys.space.pressed = false;
+        //   break;
       }
-      //enemys
-      switch (event.key) {
-        case "ArrowRight":
-          this.keys.ArrowRight.pressed = false;
-          break;
-        case "ArrowLeft":
-          this.keys.ArrowLeft.pressed = false;
-          break;
-        case "ArrowUp":
-          this.keys.ArrowUp.pressed = false;
-          break;
-      }
-      //    console.log(event.key)
+      //   enemys
+      //   switch (event.key) {
+      //     case "ArrowRight":
+      //       this.keys.ArrowRight.pressed = false;
+      //       break;
+      //     case "ArrowLeft":
+      //       this.keys.ArrowLeft.pressed = false;
+      //       break;
+      //     case "ArrowUp":
+      //       this.keys.ArrowUp.pressed = false;
+      //       break;
+      //   }
+      console.log(event.key);
     });
   }
 }

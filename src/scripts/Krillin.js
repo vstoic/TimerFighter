@@ -78,6 +78,13 @@ export default class Krillin extends Sprite {
     }
     this.isAttacking = true;
   };
+  dash() {
+    if (this.image === this.sprites.idleRight.image) {
+      this.playerSwitchSprite("dashRight");
+    } else if (this.image === this.sprites.idleLeft.image) {
+      this.playerSwitchSprite("dashLeft");
+    }
+  };
 
   playerSwitchSprite(sprites) {
     if (
@@ -103,6 +110,17 @@ export default class Krillin extends Sprite {
     )
       return;
 
+    if (
+      this.image === this.sprites.dashRight.image &&
+      this.framesCurrent < this.sprites.dashRight.framesMax - 1
+    )
+      return;
+
+    if (
+      this.image === this.sprites.dashLeft.image &&
+      this.framesCurrent < this.sprites.dashLeft.framesMax - 1
+    )
+      return;
     switch (sprites) {
       case "idleRight":
         if (this.image !== this.sprites.idleRight.image) {
@@ -195,6 +213,7 @@ export default class Krillin extends Sprite {
           this.image = this.sprites.kickRight.image;
           this.framesMax = this.sprites.kickRight.framesMax;
           this.scale = this.sprites.kickRight.scale;
+          this.framesHold = this.sprites.kickRight.framesHold;
           this.framesCurrent = 0;
         }
         break;
@@ -203,6 +222,29 @@ export default class Krillin extends Sprite {
           this.image = this.sprites.kickLeft.image;
           this.framesMax = this.sprites.kickLeft.framesMax;
           this.scale = this.sprites.kickLeft.scale;
+          this.framesHold = this.sprites.kickLeft.framesHold;
+          this.framesCurrent = 0;
+        }
+        break;
+      case "dashRight":
+        if (
+          this.image !== this.sprites.dashRight.image &&
+          this.lastKey === "d"
+        ) {
+          this.image = this.sprites.dashRight.image;
+          this.framesMax = this.sprites.dashRight.framesMax;
+          this.scale = this.sprites.dashRight.scale;
+          this.framesCurrent = 0;
+        }
+        break;
+      case "dashLeft":
+        if (
+          this.image !== this.sprites.dashLeft.image &&
+          this.lastKey === "a"
+        ) {
+          this.image = this.sprites.dashLeft.image;
+          this.framesMax = this.sprites.dashLeft.framesMax;
+          this.scale = this.sprites.dashLeft.scale;
           this.framesCurrent = 0;
         }
         break;
