@@ -5,7 +5,7 @@
     //frames hold is how many frames elapsed until you loop the current frame
 export default class Sprite {
   constructor( obj ) {
-    console.log(obj)
+    // console.log(obj)
       this.c = obj.c
       this.position = obj.position
       this.width = 50

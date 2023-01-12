@@ -17,7 +17,31 @@ export default class Game {
     this.canvasHeight = height;
     this.gravity = 0.4;
     this.killCount = 0;
-    // window.requestAnimationFrame(this.animate.bind(this))
+    this.keys = {
+      a: {
+        pressed: false,
+      },
+      d: {
+        pressed: false,
+      },
+      w: {
+        pressed: false,
+      },
+      ArrowRight: {
+        pressed: false,
+      },
+      ArrowLeft: {
+        pressed: false,
+      },
+      ArrowUp: {
+        pressed: false,
+      },
+      dash: {
+        pressed: false,
+      },
+    };
+
+
     this.enemy = new Bot({
       c: this.c,
       canvas: this.canvas,
@@ -94,6 +118,9 @@ export default class Game {
       frameHold: 10,
       health: 100,
     });
+
+
+
     this.player = new Krillin({
       c: this.c,
       canvas: this.canvas,
@@ -220,7 +247,12 @@ export default class Game {
       },
       gravity: this.gravity,
       frameHold: 10,
+      canClick: "true",
+
     });
+
+
+
     this.background = new Sprite({
       c: this.c,
       position: {
@@ -235,6 +267,8 @@ export default class Game {
         y: 0,
       },
     });
+
+
     this.house = new Sprite({
       c: this.c,
       position: {
@@ -249,29 +283,6 @@ export default class Game {
         y: 0,
       },
     });
-    this.keys = {
-      a: {
-        pressed: false,
-      },
-      d: {
-        pressed: false,
-      },
-      w: {
-        pressed: false,
-      },
-      ArrowRight: {
-        pressed: false,
-      },
-      ArrowLeft: {
-        pressed: false,
-      },
-      ArrowUp: {
-        pressed: false,
-      },
-      // SpaceBar: {
-      // pressed: false,
-      // },
-    };
     this.eventListener();
   }
 
@@ -489,6 +500,7 @@ export default class Game {
 
   eventListener() {
     window.addEventListener("keydown", (event) => {
+      let canClick = true;
       switch (event.key) {
         case "d":
           this.keys.d.pressed = true;
@@ -499,7 +511,8 @@ export default class Game {
           this.player.lastKey = "a";
           break;
         case "w":
-          if (this.player.velocity.y === 0) this.player.velocity.y = -15;
+            this.player.jump();
+        //   if (this.player.velocity.y === 0) this.player.velocity.y = -15;
           break;
         case ",":
           this.player.punch();
@@ -507,34 +520,16 @@ export default class Game {
         case ".":
           this.player.kick();
           break;
-        case " ":
-          this.player.dash();
-          setTimeout(() => {
-            if (this.player.velocity.x === 0 && this.player.lastKey == "d") {
-              this.player.velocity.x = 155;
-            } else if (
-              this.player.velocity.x === 0 &&
-              this.player.lastKey == "a"
-            ) {
-              this.player.velocity.x = -155;
-            }
-            5050;
-          });
+        case "/":
+          this.keys.dash.pressed = true;
+          if (this.player.canClick === "true") {
+            this.player.dash();
+            this.player.canClick = "false";
+            setTimeout(() => {
+              this.player.canClick = "true";
+            }, 300);
+          }
           break;
-        // case "ArrowRight":
-        //   this.keys.ArrowRight.pressed = true;
-        //   this.enemy.lastKey = "ArrowRight";
-        //   break;
-        // case "ArrowLeft":
-        //   this.keys.ArrowLeft.pressed = true;
-        //   this.enemy.lastKey = "ArrowLeft";
-        //   break;
-        // case "ArrowUp":
-        //   if (this.enemy.velocity.y === 0) this.enemy.velocity.y = -15;
-        //   break;
-        // case "ArrowDown":
-        //   this.enemy.attack();
-        //   break;
       }
     });
 
@@ -565,9 +560,9 @@ export default class Game {
         case "w":
           this.keys.w.pressed = false;
           break;
-        // case "space":
-        //   this.keys.space.pressed = false;
-        //   break;
+        case "/":
+          this.keys.dash.pressed = false;
+          break;
       }
       //   enemys
       //   switch (event.key) {
@@ -581,7 +576,7 @@ export default class Game {
       //       this.keys.ArrowUp.pressed = false;
       //       break;
       //   }
-      console.log(event.key);
+      //   console.log(event.key);
     });
   }
 }

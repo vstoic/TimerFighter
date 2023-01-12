@@ -34,6 +34,7 @@ export default class Krillin extends Sprite {
       width: 65,
       height: 25,
     };
+    this.canClick = obj.canClick;
     //this for loop resets the sprite to the new object/hash
     for (const sprite in this.sprites) {
       this.sprites[sprite].image = new Image();
@@ -81,8 +82,28 @@ export default class Krillin extends Sprite {
   dash() {
     if (this.image === this.sprites.idleRight.image) {
       this.playerSwitchSprite("dashRight");
+      setTimeout(() => {  
+        this.velocity.x = 185;
+      }, 350);
     } else if (this.image === this.sprites.idleLeft.image) {
       this.playerSwitchSprite("dashLeft");
+      setTimeout(() => {
+        this.velocity.x = -185;
+      }, 350);
+    }
+  };
+  jump() {
+    if (this.image === this.sprites.idleLeft.image) {
+      this.playerSwitchSprite("jumpLeft");
+      if (this.velocity.y === 0) this.velocity.y = -15;
+    } else if (this.velocity.y > 0 && this.image === this.sprites.idleLeft.image) {
+      this.playerSwitchSprite("dropLeft");
+    }
+    if ( this.image === this.sprites.idleRight.image) {
+      this.playerSwitchSprite("jump");
+      if (this.velocity.y === 0) this.velocity.y = -15;
+    } else if (this.velocity.y > 0 && this.image === this.sprites.idleRight.image) {
+      this.playerSwitchSprite("drop");
     }
   };
 
@@ -250,77 +271,4 @@ export default class Krillin extends Sprite {
         break;
     }
   }
-
-  // enemySwitchSprite(sprites) {
-  //   switch (sprites) {
-  //     case "idleRight":
-  //       if (this.image !== this.sprites.idleRight.image) {
-  //         this.image = this.sprites.idleRight.image;
-  //         this.framesMax = this.sprites.idleRight.framesMax;
-  //         this.framesCurrent = 0;
-  //       }
-  //       break;
-  //     case "idleLeft":
-  //       if (this.image !== this.sprites.idleLeft.image) {
-  //         this.image = this.sprites.idleLeft.image;
-  //         this.framesMax = this.sprites.idleLeft.framesMax;
-  //         this.framesCurrent = 0;
-  //       }
-  //       break;
-  //     case "runRight":
-  //       if (this.image !== this.sprites.runRight.image) {
-  //         this.image = this.sprites.runRight.image;
-  //         this.framesMax = this.sprites.runRight.framesMax;
-  //         this.framesCurrent = 0;
-  //       }
-  //       break;
-  //     case "runLeft":
-  //       if (this.image !== this.sprites.runLeft.image) {
-  //         this.image = this.sprites.runLeft.image;
-  //         this.framesMax = this.sprites.runLeft.framesMax;
-  //         this.framesCurrent = 0;
-  //       }
-  //       break;
-  //     case "jump":
-  //       if (
-  //         this.image !== this.sprites.jump.image &&
-  //         this.lastKey === "ArrowRight"
-  //       ) {
-  //         this.image = this.sprites.jump.image;
-  //         this.framesMax = this.sprites.jump.framesMax;
-  //         this.framesCurrent = 0;
-  //       }
-  //       break;
-  //     case "drop":
-  //       if (
-  //         this.image !== this.sprites.drop.image &&
-  //         this.lastKey === "ArrowRight"
-  //       ) {
-  //         this.image = this.sprites.drop.image;
-  //         this.framesMax = this.sprites.drop.framesMax;
-  //         this.framesCurrent = 0;
-  //       }
-  //       break;
-  //     case "jumpLeft":
-  //       if (
-  //         this.image !== this.sprites.jumpLeft.image &&
-  //         this.lastKey === "ArrowLeft"
-  //       ) {
-  //         this.image = this.sprites.jumpLeft.image;
-  //         this.framesMax = this.sprites.jumpLeft.framesMax;
-  //         this.framesCurrent = 0;
-  //       }
-  //       break;
-  //     case "dropLeft":
-  //       if (
-  //         this.image !== this.sprites.dropLeft.image &&
-  //         this.lastKey === "ArrowLeft"
-  //       ) {
-  //         this.image = this.sprites.dropLeft.image;
-  //         this.framesMax = this.sprites.dropLeft.framesMax;
-  //         this.framesCurrent = 0;
-  //       }
-  //       break;
-  //   }
-  // }
-}
+};
