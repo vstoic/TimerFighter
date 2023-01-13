@@ -13,5 +13,5 @@ document.addEventListener('DOMContentLoaded', () => {
     game.animatePlayer();
     game.animateBot();
     // create model function for character select and time select
-    game.decreaseTimer(10);
+    game.decreaseTimer(60);
 })
