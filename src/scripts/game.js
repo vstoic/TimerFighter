@@ -2,6 +2,7 @@ import Player from "./Player.js";
 import Sprite from "./Sprite.js";
 import Bot from "./Bot.js";
 import Krillin from "./Krillin.js";
+
 //   //when a this.player is being invoked it createss a new sprite of a this.player with x, y set.
 //     //this.player has x,y velocity of 0,
 //     //offset is for the attackbox and which way it faces
