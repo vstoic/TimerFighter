@@ -251,8 +251,6 @@ export default class Game {
 
     });
 
-
-
     this.background = new Sprite({
       c: this.c,
       position: {
@@ -305,11 +303,11 @@ export default class Game {
     {
       false;
     }
-  }
+  };
 
   displayScore() {
     document.querySelector("#displayResults").innerHTML = "Times Up!";
-  }
+  };
 
   decreaseTimer(time) {
     // killCount = this.killCount;
@@ -324,21 +322,22 @@ export default class Game {
         clearInterval(gameTimer);
       }
     }, 1000);
-  }
+  };
+
 
   animateGame() {
     this.background.update();
     this.house.update();
+
     document.querySelector(".kill-count").innerHTML =
       "Score: " + this.killCount;
     window.requestAnimationFrame(this.animateGame.bind(this));
-  }
+  };
 
   animatePlayer() {
     this.player.update();
     this.player.velocity.x = 0;
-    //if last key is pressed then player will move in that direction by altering velocity
-    //also the players sprite image is set to the correct animation sprite
+    //changes sprites and velocity for left and right movement
     if (this.keys.a.pressed && this.player.lastKey === "a") {
       this.player.playerSwitchSprite("runLeft");
       this.player.velocity.x = -7;
@@ -350,6 +349,17 @@ export default class Game {
     } else if (this.player.lastKey === "a" && this.player.velocity.x === 0) {
       this.player.playerSwitchSprite("idleLeft");
     }
+
+    //colission for player and borders
+    if (this.player.position.x <= 0 && this.keys.a.pressed) {
+      this.player.velocity.x = 0;
+    }; 
+    if (this.player.position.x + 65 >= this.canvasWidth && this.keys.d.pressed) {
+        this.player.velocity.x = 0;
+    };
+    
+
+    // changes sprites for jumping
     if (this.player.velocity.y < 0 && this.player.lastKey === "a") {
       this.player.playerSwitchSprite("jumpLeft");
     } else if (this.player.velocity.y > 0 && this.player.lastKey === "a") {
@@ -511,8 +521,8 @@ export default class Game {
           this.player.lastKey = "a";
           break;
         case "w":
-            this.player.jump();
-        //   if (this.player.velocity.y === 0) this.player.velocity.y = -15;
+            // this.player.jump();
+          if (this.player.velocity.y === 0) this.player.velocity.y = -15;
           break;
         case ",":
           this.player.punch();

@@ -83,29 +83,39 @@ export default class Krillin extends Sprite {
     if (this.image === this.sprites.idleRight.image) {
       this.playerSwitchSprite("dashRight");
       setTimeout(() => {  
+        if (this.position.x + 185 >= this.canvasW) {
+          this.position.x = this.canvasW - this.width;
+          return;
+        } else {
         this.velocity.x = 185;
+        }
       }, 350);
     } else if (this.image === this.sprites.idleLeft.image) {
       this.playerSwitchSprite("dashLeft");
       setTimeout(() => {
-        this.velocity.x = -185;
+        if (this.position.x - 185 <= 0) {
+          this.position.x = 0;
+          return;
+        } else {
+          this.velocity.x = -185;
+        }
       }, 350);
     }
   };
-  jump() {
-    if (this.image === this.sprites.idleLeft.image) {
-      this.playerSwitchSprite("jumpLeft");
-      if (this.velocity.y === 0) this.velocity.y = -15;
-    } else if (this.velocity.y > 0 && this.image === this.sprites.idleLeft.image) {
-      this.playerSwitchSprite("dropLeft");
-    }
-    if ( this.image === this.sprites.idleRight.image) {
-      this.playerSwitchSprite("jump");
-      if (this.velocity.y === 0) this.velocity.y = -15;
-    } else if (this.velocity.y > 0 && this.image === this.sprites.idleRight.image) {
-      this.playerSwitchSprite("drop");
-    }
-  };
+  // jump() {
+  //   if (this.image === this.sprites.idleLeft.image) {
+  //     this.playerSwitchSprite("jumpLeft");
+  //     if (this.velocity.y === 0) this.velocity.y = -15;
+  //   } else if (this.velocity.y > 0 && this.image === this.sprites.idleLeft.image) {
+  //     this.playerSwitchSprite("dropLeft");
+  //   }
+  //   if ( this.image === this.sprites.idleRight.image) {
+  //     this.playerSwitchSprite("jump");
+  //     if (this.velocity.y === 0) this.velocity.y = -15;
+  //   } else if (this.velocity.y > 0 && this.image === this.sprites.idleRight.image) {
+  //     this.playerSwitchSprite("drop");
+  //   }
+  // };
 
   playerSwitchSprite(sprites) {
     if (

@@ -54,6 +54,8 @@ export default class Bot extends Sprite {
   update() {
     this.draw();
     this.drawHealthBar();
+    // this.animateAiMovement();
+
     // this.drawHealthBarBorder();
 
     this.animateFrames();
@@ -78,14 +80,32 @@ export default class Bot extends Sprite {
     }
   }
   // when invoked attacking is character/bots isAttacking value set to true for 100ms then changed back to false
-  attack() {
-    if (this.image === this.sprites.idleRight.image) {
-      this.playerSwitchSprite("punchRight");
-    } else if (this.image === this.sprites.idleLeft.image) {
-      this.playerSwitchSprite("punchLeft");
+  // attack() {
+  //   if (this.image === this.sprites.idleRight.image) {
+  //     this.playerSwitchSprite("punchRight");
+  //   } else if (this.image === this.sprites.idleLeft.image) {
+  //     this.playerSwitchSprite("punchLeft");
+  //   }
+  //   this.isAttacking = true;
+  // }
+  animateAiMovement() { 
+    let speed = 2;
+    let direction = -1;
+
+    // this.position.x += speed * direction;d
+    // if ( this.position.x + 10 >= this.canvasW || this.position.x <= 10) {
+    //   direction *= -1
+    // } 
+    if (this.position.x >= this.canvasW) {
+      this.position.x = this.canvasW;
+      this.velocity.x = 0;
+    } else {
+      this.position.x += speed * direction;
+      if (this.position.x <= 10) {
+        direction *= -1;
+      }
     }
-    this.isAttacking = true;
-  }
+  };
 
   enemySwitchSprite(sprites) {
     switch (sprites) {
