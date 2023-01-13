@@ -23,5 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
     game.animateBot();
     // create model function for character select and time select
     game.decreaseTimer(60);
-    song.play();
+    // song.play();
+    // document.querySelector(".music").addEventListener("click", () => {
+    //     music.overworld.play();
+    // });
+    document.querySelector(".music").addEventListener("click", () => {
+        song.pause();
+    });
+    document.querySelector(".restart").addEventListener("click", () => {
+        ;
+    })
 })

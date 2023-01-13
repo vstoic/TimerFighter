@@ -38,6 +38,30 @@ html {
   font-weight: 100;
 }
 
+.music {
+  font-size: 14px;
+  color: white;
+  font-family: "Press Start 2P", cursive;
+  font-weight: 100;
+  border: 3px solid white;
+  padding: 5px;
+}
+
+.music:hover {
+  background-color: white;
+  color: black;
+  cursor: help;
+}
+
+.restart {
+  font-size: 14px;
+  color: white;
+  font-family: "Press Start 2P", cursive;
+  font-weight: 100;
+  border: 3px solid white;
+  padding: 5px;
+}
+
 .kill-count {
   display: flex;
   align-items: center;
