@@ -34,7 +34,8 @@ export default class Krillin extends Sprite {
       width: 65,
       height: 25,
     };
-    this.canClick = obj.canClick;
+    this.canDash = obj.canDash;
+    this.canJump = obj.canJump;
     //this for loop resets the sprite to the new object/hash
     for (const sprite in this.sprites) {
       this.sprites[sprite].image = new Image();

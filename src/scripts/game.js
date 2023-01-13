@@ -247,7 +247,8 @@ export default class Game {
       },
       gravity: this.gravity,
       frameHold: 10,
-      canClick: "true",
+      canDash: "true",
+      canJump: "true",
 
     });
 
@@ -354,7 +355,7 @@ export default class Game {
     if (this.player.position.x <= 0 && this.keys.a.pressed) {
       this.player.velocity.x = 0;
     }; 
-    if (this.player.position.x + 65 >= this.canvasWidth && this.keys.d.pressed) {
+    if (this.player.position.x + this.player.width >= this.canvasWidth && this.keys.d.pressed) {
         this.player.velocity.x = 0;
     };
     
@@ -385,6 +386,7 @@ export default class Game {
   animateBot() {
     this.enemy.update();
     this.enemy.velocity.x = 0;
+    //changes sprites and velocity for left and right movement
     if (this.keys.ArrowLeft.pressed && this.enemy.lastKey === "ArrowLeft") {
       this.enemy.enemySwitchSprite("runLeft");
       this.enemy.velocity.x = -2;
@@ -405,6 +407,7 @@ export default class Game {
     ) {
       this.enemy.enemySwitchSprite("idleLeft");
     }
+    // changes sprites for jumping
     if (this.enemy.velocity.y < 0 && this.enemy.lastKey === "ArrowLeft") {
       this.enemy.enemySwitchSprite("jumpLeft");
     } else if (
@@ -421,6 +424,17 @@ export default class Game {
     ) {
       this.enemy.enemySwitchSprite("drop");
     }
+    //colission for bot and borders
+    if (this.enemy.position.x <= 0 && this.keys.a.pressed) {
+      this.enemy.velocity.x = 0;
+    }
+    if (
+      this.enemy.position.x + this.enemy.width >= this.canvasWidth &&
+      this.keys.d.pressed
+    ) {
+      this.enemy.velocity.x = 0;
+    }
+
     if (this.collisionBox() && this.enemy.isAttacking) {
       this.enemy.isAttacking = false;
       this.player.health -= 10;
@@ -510,7 +524,6 @@ export default class Game {
 
   eventListener() {
     window.addEventListener("keydown", (event) => {
-      let canClick = true;
       switch (event.key) {
         case "d":
           this.keys.d.pressed = true;
@@ -521,8 +534,19 @@ export default class Game {
           this.player.lastKey = "a";
           break;
         case "w":
-            // this.player.jump();
-          if (this.player.velocity.y === 0) this.player.velocity.y = -15;
+            if (this.player.canJump === "true" && (this.player.position.y + 90) <= 75) {
+              this.player.position.y = 0;
+              this.player.canJump = "false";
+              setTimeout(() => {
+                this.player.canJump = "true";
+              }, 1050)
+            } else if (this.player.canJump === "true"){
+                this.player.velocity.y = -15;
+                this.player.canJump = "false";
+                setTimeout(() => {
+                  this.player.canJump = "true";
+                }, 1050);
+            }
           break;
         case ",":
           this.player.punch();
@@ -532,11 +556,11 @@ export default class Game {
           break;
         case "/":
           this.keys.dash.pressed = true;
-          if (this.player.canClick === "true") {
+          if (this.player.canDash === "true") {
             this.player.dash();
-            this.player.canClick = "false";
+            this.player.canDash = "false";
             setTimeout(() => {
-              this.player.canClick = "true";
+              this.player.canDash = "true";
             }, 300);
           }
           break;
@@ -574,19 +598,6 @@ export default class Game {
           this.keys.dash.pressed = false;
           break;
       }
-      //   enemys
-      //   switch (event.key) {
-      //     case "ArrowRight":
-      //       this.keys.ArrowRight.pressed = false;
-      //       break;
-      //     case "ArrowLeft":
-      //       this.keys.ArrowLeft.pressed = false;
-      //       break;
-      //     case "ArrowUp":
-      //       this.keys.ArrowUp.pressed = false;
-      //       break;
-      //   }
-      //   console.log(event.key);
     });
   }
 }
