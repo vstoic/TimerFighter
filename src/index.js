@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let playing = false;
     const canvas = document.getElementById('timer-fighter');
     const c = canvas.getContext('2d')
+    canvas.width = 1024;
+    canvas.height = 576;
+
     const song = new Howl({
         src: ["src/assets/Audio/WaveMeow-Cosmic(cut).mp3"],
         volume: 0.3,
@@ -15,18 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         },
     });
-    canvas.width = 1024;
-    canvas.height = 576;
-    let game = new Game(c, canvas, canvas.width, canvas.height);
-    game.animateGame();
-    game.animatePlayer();
-    game.animateBot();
-    // create model function for character select and time select
-    game.decreaseTimer(10);
-    // song.play();
-    // document.querySelector(".music").addEventListener("click", () => {
-    //     music.overworld.play();
-    // });
     document.querySelector(".music").addEventListener("click", () => {
         if (song.playing()) {
             song.pause();
@@ -35,6 +26,18 @@ document.addEventListener('DOMContentLoaded', () => {
             song.play();
         }
     });
+    // song.play();
+    // document.querySelector(".music").addEventListener("click", () => {
+    //     music.overworld.play();
+    // });
+    
+
+    let game = new Game(c, canvas, canvas.width, canvas.height);
+    game.animateGame();
+    game.animatePlayer();
+    game.animateBot();
+    game.decreaseTimer(100);
+
     document.querySelector(".restart").addEventListener("click", () => {
         location.reload();
         

@@ -42,7 +42,6 @@ export default class Game {
       },
     };
 
-
     this.enemy = new Bot({
       c: this.c,
       canvas: this.canvas,
@@ -284,6 +283,8 @@ export default class Game {
       },
     });
     this.eventListener();
+
+    // this.decreaseTimer = this.decreaseTimer.bind(this);
   }
 
   // collision for attackboxes and this.enemy
@@ -307,30 +308,23 @@ export default class Game {
     }
   };
 
-  displayScore() {
-    document.querySelector("#displayResults").innerHTML = "Times Up!";
-  };
-
   decreaseTimer(time) {
-    // killCount = this.killCount;
-    let gameTimer = setInterval(function () {
+    let gameTimer = setInterval(() => {
       time--;
       if (time > -1) {
         document.querySelector(".timer").innerHTML = "Time: " + time;
       } else {
         document.querySelector("#displayResults").innerHTML =
           "Times Up!" + "<br>" + "You killed " + this.killCount + " enemies!";
-        // this.displayScore();
+        console.log(this.killCount)
         clearInterval(gameTimer);
       }
     }, 1000);
   };
 
-
   animateGame() {
     this.background.update();
     this.house.update();
-
     document.querySelector(".kill-count").innerHTML =
       "Score: " + this.killCount;
     window.requestAnimationFrame(this.animateGame.bind(this));
@@ -526,15 +520,15 @@ export default class Game {
   eventListener() {
     window.addEventListener("keydown", (event) => {
       switch (event.key) {
-        case "d":
+        case "d" || "D":
           this.keys.d.pressed = true;
-          this.player.lastKey = "d";
+          this.player.lastKey = "d" || "D";
           break;
-        case "a":
+        case "a" || "A":
           this.keys.a.pressed = true;
-          this.player.lastKey = "a";
+          this.player.lastKey = "a" || "A";
           break;
-        case "w":
+        case "w" || "W":
             if (this.player.canJump === "true" && (this.player.position.y + 90) <= 75) {
               this.player.position.y = 0;
               this.player.canJump = "false";
@@ -571,12 +565,12 @@ export default class Game {
     //tried making a eventlistener for doubleclicking to dash but not working
     window.addEventListener("dblclick", (event) => {
       switch (event.key) {
-        case "z":
+        case "z" || "Z":
           // this.keys.a.pressed = true;
           this.player.punch();
           // this.player.lastKey = "a";
           break;
-        case "c":
+        case "c" || "C":
           this.player.punch();
           // this.keys.d.pressed = true;
           // this.player.lastKey = "d";
@@ -586,13 +580,13 @@ export default class Game {
     });
     window.addEventListener("keyup", (event) => {
       switch (event.key) {
-        case "d":
+        case "d" || "D":
           this.keys.d.pressed = false;
           break;
-        case "a":
+        case "a" || "A":
           this.keys.a.pressed = false;
           break;
-        case "w":
+        case "w" || "W":
           this.keys.w.pressed = false;
           break;
         case "/":

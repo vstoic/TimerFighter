@@ -1,6 +1,6 @@
-html{
+html {
     background-color: white;
-    background-image: url('https://wallpapercave.com/wp/wp8794617.jpg');
+    background-image: url("https://wallpapercave.com/wp/wp8794617.jpg");
     background-position: center;
     background-size: cover;
 }
@@ -8,8 +8,8 @@ html{
 .title {
     font-size: 28px;
     display: flex;
-    color: white;
-    font-family: 'Press Start 2P', cursive;
+    color: gold;
+    font-family: "Press Start 2P", cursive;
     font-weight: 100;
     align-items: center;
     justify-content: center;
@@ -17,86 +17,109 @@ html{
     margin-bottom: 2vh;
 }
 .time-score {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: row;
-  margin-bottom: 1.5vh;
-
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    margin-bottom: 1.5vh;
 }
 .timer {
-        // background-color: black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        color: white;
-        font-family: 'Press Start 2P', cursive;
-        font-weight: 100;
+    // background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    font-family: "Press Start 2P", cursive;
+    font-weight: 100;
 }
 .music {
-  font-size: 14px;
-        color: white;
-        font-family: 'Press Start 2P', cursive;
-        font-weight: 100;
-        border: 3px solid white;
-        padding: 5px; 
-        cursor: pointer;
+    font-size: 14px;
+    color: white;
+    font-family: "Press Start 2P", cursive;
+    font-weight: 100;
+    border: 3px solid white;
+    padding: 5px;
+    cursor: pointer;
 }
 .music:hover {
-  background-color: white;
-  color: black;
-
+    background-color: white;
+    color: black;
 }
 
 .restart {
-  font-size: 14px;
-        color: white;
-        font-family: 'Press Start 2P', cursive;
-        font-weight: 100;
-        border: 3px solid white;
-        padding: 5px; 
-        cursor: pointer;
+    font-size: 14px;
+    color: white;
+    font-family: "Press Start 2P", cursive;
+    font-weight: 100;
+    border: 3px solid white;
+    padding: 5px;
+    cursor: pointer;
 }
 .kill-count {
-        // background-color: black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        font-family: 'Press Start 2P', cursive;
-        font-weight: 100;
-        color: white;
+    // background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-family: "Press Start 2P", cursive;
+    font-weight: 100;
+    color: white;
 }
 #mainContainer {
-    width: 100%;
+    width: 80%;
     text-align: center;
-    display: inline;
-    position: relative;
-    display: inline-block;
-    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 #timer-fighter {
-  border-radius: 10px;
-  border: 4px solid rgb(72, 72, 72);
-  height: "1024"; 
-  width: "576";
+    border-radius: 10px;
+    border: 4px solid rgb(72, 72, 72);
+    z-index: 1;
 }
+
+#menu {
+    border-radius: 10px;
+    width: 1024px;
+    height: 576px;
+    z-index: 3;
+    position: absolute;
+    background-color: rgb(65, 65, 65);
+    border: 4px solid rgb(72, 72, 72);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+
+    .menu-item {
+        color: rgb(0, 0, 0);
+        font-size: 28px;
+        background-color: gold;
+        font-family: "Press Start 2P", cursive;
+        width: fit-content;
+    }
+}
+
+
 #displayResults {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  position: absolute;
-  top: 48%;
-  left: 32%;
-  font-size: 40px;
-  font-family: Helvetica, sans-serif;
-  text-shadow:
-            0.07em 0 black,
-            0 0.07em black,
-            -0.07em 0 black,
-            0 -0.07em black;
+    // display: flex;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    height: auto;
+    color: white;
+    font-size: 40px;
+    font-family: Helvetica, sans-serif;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black,
+        0 -0.07em black;
 }
 .instructions {
     display: flex;
@@ -107,9 +130,9 @@ html{
     font-size: 20px;
 }
 #instruction {
-  margin-top: 4vh;
+    margin-top: 4vh;
     color: white;
-    font-family: 'Press Start 2P', cursive;
+    font-family: "Press Start 2P", cursive;
     font-weight: 0;
     font-size: 10px;
 }
