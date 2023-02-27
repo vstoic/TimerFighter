@@ -3,11 +3,13 @@ import Sprite from './scripts/Sprite.js'
 import { Howl } from 'howler';
 
 document.addEventListener('DOMContentLoaded', () => {
-    let playing = false;
+    
     const canvas = document.getElementById('timer-fighter');
     const c = canvas.getContext('2d')
     canvas.width = 1024;
     canvas.height = 576;
+
+
 
     const song = new Howl({
         src: ["src/assets/Audio/WaveMeow-Cosmic(cut).mp3"],
@@ -30,13 +32,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // document.querySelector(".music").addEventListener("click", () => {
     //     music.overworld.play();
     // });
-    
 
-    let game = new Game(c, canvas, canvas.width, canvas.height);
-    game.animateGame();
-    game.animatePlayer();
-    game.animateBot();
-    game.decreaseTimer(100);
+    const startButton = document.querySelector('#start');
+    const menuDiv = document.querySelector('#menu');
+
+    startButton.addEventListener('click', () => {
+      // Run a bunch of objects here
+        const timeSelect = document.querySelector('#time-select');
+        const selectedTime = timeSelect.value;
+        menuDiv.style.display = 'none';
+        let game = new Game(c, canvas, canvas.width, canvas.height);
+        game.animateGame();
+        game.animatePlayer();
+        game.animateBot();
+        game.decreaseTimer(selectedTime);
+    });
+    
 
     document.querySelector(".restart").addEventListener("click", () => {
         location.reload();

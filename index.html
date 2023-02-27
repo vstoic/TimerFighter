@@ -21,18 +21,23 @@
 </head>
 <body>
     <div id="mainContainer" >
-        <!-- <div id="menu"> 
+        <div id="menu"> 
+            <select id="time-select"">
+                <option value="30">30 Seconds</option>
+                <option value="60">60 Seconds</option>
+                <option value="120">120 Seconds</option>
+            </select>
             <button class="menu-item" id="start">Start</button>
             <button class="menu-item" id="instructions">Instructions</button>
-            <button class="menu-item" id="credits">Credits</button>
-        </div> -->
+            <!-- <button class="menu-item" id="credits">Credits</button> -->
+        </div>
         <canvas id="timer-fighter">
         </canvas>
         <div id="displayResults"></div>
         <div class="instructions">
             <p id="instruction">"WASD" to Move</p>
-            <p id="instruction">"<" to Light Attack</p>
-            <p id="instruction">">" to Hard Attack</p>
+            <p id="instruction">"<" Light Attack</p>
+            <p id="instruction">">" Hard Attack</p>
             <p id="instruction">"?" to Dash</p>
         </div>
     </div>
