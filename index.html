@@ -15,30 +15,41 @@
     <div class="time-score">
         <h2 class="timer"></h2>
         <h2 class="kill-count"></h2>
-        <div class="music">Music</div>
-        <div class="restart">Restart</div>
     </div>
 </head>
 <body>
     <div id="mainContainer" >
         <div id="menu"> 
-            <select id="time-select"">
-                <option value="30">30 Seconds</option>
-                <option value="60">60 Seconds</option>
-                <option value="120">120 Seconds</option>
-            </select>
-            <button class="menu-item" id="start">Start</button>
-            <button class="menu-item" id="instructions">Instructions</button>
+            <div class="options">
+                <p>Timer:</p>
+                <select class="game-options" id="time-select"">
+                    <option value="30">30 Seconds</option>
+                    <option value="60">60 Seconds</option>
+                    <option value="120">120 Seconds</option>
+                </select>
+                <p>Fighter:</p>
+                <select class= "game-options"id="char-select"">
+                    <option value="">Krillin</option>
+                    <option value="">Work in Progress..</option>
+                </select>
+                <button class="menu-item" id="start">Start</button>
+            </div>
+            <div class="instructions">
+                <p id="instruction">Welcome to <mark class="ptitle">Timer Fighter</mark>, the game where you get to unleash all your rage and beat the living daylights out of some unsuspecting characters. It's like a boxing match, but with more punches, more mayhem, and absolutely no rules! </p>
+                <p id="instruction">"WASD" to Move</p>
+                <p id="instruction">"<" Light Attack</p>
+                <p id="instruction">">" Hard Attack</p>
+                <p id="instruction">"?" to Dash</p>
+            </div>
+            <!-- <button class="menu-item" id="instructions">Instructions</button> -->
             <!-- <button class="menu-item" id="credits">Credits</button> -->
         </div>
         <canvas id="timer-fighter">
         </canvas>
         <div id="displayResults"></div>
-        <div class="instructions">
-            <p id="instruction">"WASD" to Move</p>
-            <p id="instruction">"<" Light Attack</p>
-            <p id="instruction">">" Hard Attack</p>
-            <p id="instruction">"?" to Dash</p>
+        <div class="bottom-buttons">
+            <div class="music">Music</div>
+            <div class="restart">Restart</div>
         </div>
     </div>
 </body>
