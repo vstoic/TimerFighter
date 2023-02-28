@@ -111,12 +111,12 @@ html {
     gap: 10px;
 
     p {
-        font-size: 16px;
-        font-family: 'Press Start 2P', cursive;
-        font-weight: bold;
-        color: white;
-        margin: 2px;
-        padding: 5px;
+      font-size: 16px;
+      font-family: 'Press Start 2P', cursive;
+      font-weight: bold;
+      color: white;
+      margin: 2px;
+      padding: 5px;
     }
   }
   .game-options {
@@ -145,18 +145,40 @@ html {
 }
 
 #displayResults {
-  // display: flex;
-  position: absolute;
   margin-left: auto;
   margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
   height: auto;
-  color: white;
-  font-size: 40px;
-  font-family: Helvetica, sans-serif;
-  text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+  border-radius: 10px;
+  width: 1024px;
+  height: 576px;
+  z-index: 2;
+  position: absolute;
+  background-color: rgb(65, 65, 65);
+  background-image: url('https://i.postimg.cc/cJSGTLQx/Krillin-wallpaper.jpg');
+  background-position: center;
+  background-size: cover;
+  border: 4px solid rgb(72, 72, 72);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  display: none;
+}
+
+#results {
+  text-shadow: 0 0 1px #a3781a, 0 0 2px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 4px #fff;;
+  color: rgba(0, 0, 0, 0.758);
+  font-size: 32px;
+  font-family: 'helvetica';
+    font-weight: 400;
+    letter-spacing: -1px;
+  line-height: 28px;
+  position: absolute;
+  left: 15%;
+  bottom: 10%;
+  background-color: #ae6f0982;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .bottom-buttons {
@@ -175,7 +197,7 @@ html {
   justify-content: space-evenly;
   background-color: #16191a;
   border-radius: 8px;
-border: 4px solid rgb(72, 72, 72);
+  border: 4px solid rgb(72, 72, 72);
   padding: 25px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
@@ -193,5 +215,4 @@ border: 4px solid rgb(72, 72, 72);
   font-weight: 0;
   line-height: 18px;
   font-size: 10px;
-
 }

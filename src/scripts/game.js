@@ -309,14 +309,16 @@ export default class Game {
   };
 
   decreaseTimer(time) {
+    const resultsDiv = document.querySelector('#displayResults');
+
     let gameTimer = setInterval(() => {
       time--;
       if (time > -1) {
         document.querySelector(".timer").innerHTML = "Time: " + time;
       } else {
-        document.querySelector("#displayResults").innerHTML =
-          "Times Up!" + "<br>" + "You killed " + this.killCount + " enemies!";
-        console.log(this.killCount)
+        document.querySelector("#results").innerHTML =
+          "Times Up!" + "<br>" + "Score:" + "<br>" + this.killCount + " enemies";
+        resultsDiv.style.display = 'flex';
         clearInterval(gameTimer);
       }
     }, 1000);
