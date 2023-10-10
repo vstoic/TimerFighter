@@ -1,42 +1,35 @@
-## Background:
-TimerFighter is a arcade fighting game where you have to defeat as many bots  
-within an selected time. The bots will only defend againtst player and the defence level of bot will increase with each victory.
-Each characters have different styles of play and sets of moves. It will be up to the player to become proficient and smash the timer.
+# Timer Fighter
+Live Site: [Timer Fighter](vstoic.github.io/TimerFighter/)
+## Background and Overview:
+TimerFighter is an arcade fighting game where you take on bots in a race against the clock. With each victory, the bots get tougher, so you'll need to master an arsenal of moves to become the ultimate bot-beater. Can you smash the timer and claim victory?
 
 ## Functionality & MVPs:
 
-Core features or functionalities<br/>
--Has many unique characters, each with their own attack combinations<br/>
--Players select a character, map, timer and game dificulty<br/>
--There will always be one bot to fight<br/>
--Bots will improve blocking intuition for every other spawn<br/>
--A detailed character combo list <br/>
--Music & sound <br/>
+### Menu Screen
+- Players select a character, and timer
+- Instructions & a detailed character combo list
 
-## Other Aspects:
-{ A lobby animation screen }<br/>
-{ Character select screen with character combonation tables }<br/>
-{ Music selection with queue }<br/>
-{ Production Readme }<br/>
+### Timer & Score Display
+- A count down clock that stops the game
+- End Game Display
 
-## Wireframes:
-![Hot Nets Home Page](wireframes/demo.png)
+### Fighter
+- Has many unique characters, each with their own attack combinations
+- Each character has unite animations
 
-![Hot Nets Home Page](wireframes/browser_page.png)
+### Battleground
+- Background has animation
 
-![Hot Nets Home Page](wireframes/select_menu.png)
-
-![Hot Nets Home Page](wireframes/game.png)
+### Music & sound
+- Play and pause music
+- Sound Effects
 
 
-
-## Implementation Timeline:
-Friday Afternoon - project setup<br/>
-Weekend - create player and bots, move characters with event listeners<br/>
-Monday - attacks & combos, gametimer<br/>  
-Tuesday - game menu<br/>
-Wednesday - sprite implementation<br/>
-Thursday Morning - sprite implementation<br/>
-
+## Technologies Used
+- Javascript
+- SASS
+- Webpack
+- Canvas
+- Howler.js
 
 
