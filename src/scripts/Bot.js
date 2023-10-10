@@ -1,5 +1,6 @@
 import Sprite from "./Sprite.js";
 
+// kakashi!
 export default class Bot extends Sprite {
   constructor(obj) {
     super({
@@ -18,6 +19,7 @@ export default class Bot extends Sprite {
     this.height = 65;
     this.lastKey = "";
     this.isAttacking;
+    this.takingDamage = false;
     this.health = obj.health;
     this.framesCurrent = 0;
     this.framesElapsed = 0;

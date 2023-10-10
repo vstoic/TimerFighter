@@ -2,7 +2,7 @@ import Player from "./Player.js";
 import Sprite from "./Sprite.js";
 import Bot from "./Bot.js";
 import Krillin from "./Krillin.js";
-
+import SoundPlayer from "./Sound.js";
 //   //when a this.player is being invoked it createss a new sprite of a this.player with x, y set.
 //     //this.player has x,y velocity of 0,
 //     //offset is for the attackbox and which way it faces
@@ -18,14 +18,25 @@ export default class Game {
     this.canvasHeight = height;
     this.gravity = 0.4;
     this.killCount = 0;
+    this.sound = new SoundPlayer();
+
     this.keys = {
       a: {
+        pressed: false,
+      },
+      A: {
         pressed: false,
       },
       d: {
         pressed: false,
       },
+      D: {
+        pressed: false,
+      },
       w: {
+        pressed: false,
+      },
+      W: {
         pressed: false,
       },
       ArrowRight: {
@@ -336,15 +347,15 @@ export default class Game {
     this.player.update();
     this.player.velocity.x = 0;
     //changes sprites and velocity for left and right movement
-    if (this.keys.a.pressed && this.player.lastKey === "a") {
+    if (this.keys.a.pressed && this.player.lastKey === ("a" || "A")) {
       this.player.playerSwitchSprite("runLeft");
       this.player.velocity.x = -7;
-    } else if (this.keys.d.pressed && this.player.lastKey === "d") {
+    } else if (this.keys.d.pressed && this.player.lastKey === ("d" || "D")) {
       this.player.playerSwitchSprite("runRight");
       this.player.velocity.x = 7;
-    } else if (this.player.lastKey === "d" && this.player.velocity.x === 0) {
+    } else if (this.player.lastKey === ("d" || "D") && this.player.velocity.x === 0) {
       this.player.playerSwitchSprite("idleRight");
-    } else if (this.player.lastKey === "a" && this.player.velocity.x === 0) {
+    } else if (this.player.lastKey === ("a" || "A") && this.player.velocity.x === 0) {
       this.player.playerSwitchSprite("idleLeft");
     }
 
@@ -358,14 +369,14 @@ export default class Game {
     
 
     // changes sprites for jumping
-    if (this.player.velocity.y < 0 && this.player.lastKey === "a") {
+    if (this.player.velocity.y < 0 && this.player.lastKey === ("a" || "A")) {
       this.player.playerSwitchSprite("jumpLeft");
-    } else if (this.player.velocity.y > 0 && this.player.lastKey === "a") {
+    } else if (this.player.velocity.y > 0 && this.player.lastKey === ("a" || "A")) {
       this.player.playerSwitchSprite("dropLeft");
     }
-    if (this.player.velocity.y < 0 && this.player.lastKey === "d") {
+    if (this.player.velocity.y < 0 && this.player.lastKey === ("d" || "D")) {
       this.player.playerSwitchSprite("jump");
-    } else if (this.player.velocity.y > 0 && this.player.lastKey === "d") {
+    } else if (this.player.velocity.y > 0 && this.player.lastKey === ("d" || "D")) {
       this.player.playerSwitchSprite("drop");
     }
     // if  collision/touching is true and is attacking is true
@@ -522,15 +533,15 @@ export default class Game {
   eventListener() {
     window.addEventListener("keydown", (event) => {
       switch (event.key) {
-        case "d" || "D":
+        case ("d" || "D"):
           this.keys.d.pressed = true;
-          this.player.lastKey = "d" || "D";
+          this.player.lastKey = "d";
           break;
-        case "a" || "A":
+        case ("a" || "A"):
           this.keys.a.pressed = true;
-          this.player.lastKey = "a" || "A";
+          this.player.lastKey = "a";
           break;
-        case "w" || "W":
+        case ("w" || "W"):
             if (this.player.canJump === "true" && (this.player.position.y + 90) <= 75) {
               this.player.position.y = 0;
               this.player.canJump = "false";
@@ -539,6 +550,7 @@ export default class Game {
               }, 1050)
             } else if (this.player.canJump === "true"){
                 this.player.velocity.y = -15;
+                this.sound.playJumpSound();
                 this.player.canJump = "false";
                 setTimeout(() => {
                   this.player.canJump = "true";
@@ -547,6 +559,7 @@ export default class Game {
           break;
         case ",":
           this.player.punch();
+          this.sound.playPunchSound();
           break;
         case ".":
           this.player.kick();
@@ -555,6 +568,7 @@ export default class Game {
           this.keys.dash.pressed = true;
           if (this.player.canDash === "true") {
             this.player.dash();
+            this.sound.playTeleportSound();
             this.player.canDash = "false";
             setTimeout(() => {
               this.player.canDash = "true";
@@ -582,13 +596,13 @@ export default class Game {
     });
     window.addEventListener("keyup", (event) => {
       switch (event.key) {
-        case "d" || "D":
+        case ("d" || "D"):
           this.keys.d.pressed = false;
           break;
-        case "a" || "A":
+        case ("a" || "A"):
           this.keys.a.pressed = false;
           break;
-        case "w" || "W":
+        case ("w" || "W"):
           this.keys.w.pressed = false;
           break;
         case "/":
