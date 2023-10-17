@@ -10,8 +10,6 @@ import SoundPlayer from "./Sound.js";
 export default class Game {
   constructor(c, canvas, width, height) {
     // debugger
-    // const decreaseTimer = this.decreaseTimer.bind(this);
-
     this.c = c;
     this.canvas = canvas;
     this.canvasWidth = width;
@@ -148,9 +146,7 @@ export default class Game {
     });
     this.eventListener();
 
-    // this.decreaseTimer = this.decreaseTimer.bind(this);
   }
-
   // collision for attackboxes and this.enemy
   //if the players x to width position is within enemys position and vise versa &&
   // players y to height is within enemys height and vise versa
@@ -219,16 +215,12 @@ export default class Game {
     } else if (this.player.velocity.y > 0 && this.player.lastKey === ("d" || "D")) {
       this.player.playerSwitchSprite("drop");
     }
-
-    //colission for player and borders
-    if (this.player.position.x <= 0 && this.keys.a.pressed) {
+    if (this.player.position.x <= 0 && this.keys.a.pressed) {  //colission for player and borders
       this.player.velocity.x = 0;
     }; 
     if (this.player.position.x + this.player.width >= this.canvasWidth && this.keys.d.pressed) {
         this.player.velocity.x = 0;
     };
-    
-
     // if  collision/touching is true and is attacking is true
     // the if statement resets the player attacking to false,removes 10 from health
     // and takes away a health width % of the enimmy health id in scss
@@ -287,13 +279,11 @@ export default class Game {
     // ) {
     //   this.enemy.velocity.x = 0;
     // }
-
     if (this.collisionBox() && this.enemy.isAttacking) {
       this.enemy.isAttacking = false;
       this.player.health -= 10;
     }
-    //spawn a new this.enemy when hp turns 0 and increases killcount
-    if (this.enemy.health <= 0) {
+    if (this.enemy.health <= 0) {    //spawn a new this.enemy when hp turns 0 and increases killcount
       this.killCount += 1;
       this.enemy = new Bot({
         c: this.c,

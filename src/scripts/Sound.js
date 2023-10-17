@@ -1,7 +1,4 @@
-
 import { Howl } from 'howler';
-
-
 class SoundPlayer {
   constructor() {
     this.jump = new Howl({
@@ -30,16 +27,13 @@ class SoundPlayer {
         },
     });
   }
-
+  
   playJumpSound() {
-    console.log('jump sound played')
     this.jump.play()
   }
-
   playPunchSound() {
     this.punch.play();
   }
-
   playTeleportSound() {
     this.teleport.play();
   }
