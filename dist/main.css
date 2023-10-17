@@ -104,11 +104,12 @@ html {
 }
 #menu .menu-item {
   color: rgb(0, 0, 0);
-  font-size: 28px;
+  font-size: 36px;
   background-color: gold;
-  font-family: "Press Start 2P", cursive;
+  font-family: "Press Start 2P";
   width: fit-content;
-  padding: 5px;
+  padding: 8px;
+  margin-top: 1vh;
 }
 #menu .options {
   display: flex;
@@ -118,24 +119,25 @@ html {
   gap: 10px;
 }
 #menu .options p {
-  font-size: 16px;
+  font-size: 32px;
   font-family: "Press Start 2P", cursive;
   font-weight: bold;
   color: white;
   margin: 2px;
 }
 #menu .game-options {
-  padding: 10px;
-  font-family: "Press Start 2P", cursive;
+  padding: 12px;
+  height: auto;
+  font-family: "Press Start 2P";
   border: 4px solid rgb(72, 72, 72);
-  font-size: 12px;
+  font-size: 16px;
   color: white;
   background-color: #16191a;
   cursor: pointer;
 }
 #menu .game-options option {
-  font-size: 16px;
-  font-family: "Press Start 2P", cursive;
+  font-size: 18px;
+  font-family: "Press Start 2P";
   font-weight: bold;
   color: #333;
   background-color: #ccc;
