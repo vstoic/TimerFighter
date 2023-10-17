@@ -53,6 +53,34 @@ html {
   color: black;
 }
 
+.github {
+  font-size: 14px;
+  color: white;
+  font-family: "Press Start 2P", cursive;
+  font-weight: 100;
+  border: 3px solid white;
+  padding: 5px;
+  cursor: pointer;
+}
+.github:hover {
+  background-color: white;
+  color: black;
+}
+
+.linkedin {
+  font-size: 14px;
+  color: white;
+  font-family: "Press Start 2P", cursive;
+  font-weight: 100;
+  border: 3px solid white;
+  padding: 5px;
+  cursor: pointer;
+}
+.linkedin:hover {
+  background-color: #0077b5;
+  color: white;
+}
+
 .restart {
   font-size: 14px;
   color: white;
@@ -61,6 +89,11 @@ html {
   border: 3px solid white;
   padding: 5px;
   cursor: pointer;
+}
+
+.restart:hover {
+  background-color: gold;
+  color: black;
 }
 
 .kill-count {
