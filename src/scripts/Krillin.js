@@ -25,6 +25,107 @@ export default class Krillin extends Sprite {
     this.sprites = obj.sprites;
     this.offset = obj.offset;
     this.gravity = obj.gravity;
+    this.scale = 0.65,
+    this.sprites = {
+        idleRight: {
+          imageSrc: "src/assets/Krillin/idle/idleRight.png",
+          scale: 0.65,
+          framesMax: 4,
+          image: new Image(),
+          framesHold: 15,
+        },
+        idleLeft: {
+          imageSrc: "src/assets/Krillin/idle/idleLeft.png",
+          scale: 0.65,
+          framesMax: 4,
+          image: new Image(),
+          framesHold: 15,
+        },
+        runRight: {
+          imageSrc: "src/assets/Krillin/run/runRight.png",
+          scale: 0.65,
+          framesMax: 4,
+          image: new Image(),
+          framesHold: 15,
+        },
+        runLeft: {
+          imageSrc: "src/assets/Krillin/run/runLeft.png",
+          scale: 0.65,
+          framesMax: 4,
+          image: new Image(),
+          framesHold: 15,
+        },
+        jump: {
+          imageSrc: "src/assets/Krillin//jump/jump.png",
+          scale: 0.65,
+          framesMax: 4,
+          image: new Image(),
+          framesHold: 15,
+        },
+        drop: {
+          imageSrc: "src/assets/Krillin/jump/drop.png",
+          scale: 0.65,
+          framesMax: 2,
+          image: new Image(),
+          framesHold: 15,
+        },
+        jumpLeft: {
+          imageSrc: "src/assets/Krillin/jump/jumpLeft.png",
+          scale: 0.65,
+          framesMax: 2,
+          image: new Image(),
+          framesHold: 15,
+        },
+        dropLeft: {
+          imageSrc: "src/assets/Krillin/jump/dropLeft.png",
+          scale: 0.65,
+          framesMax: 2,
+          image: new Image(),
+          framesHold: 15,
+        },
+        punchRight: {
+          imageSrc: "src/assets/Krillin/punch/punchRight.png",
+          scale: 1.28,
+          framesMax: 4,
+          image: new Image(),
+          framesHold: 15,
+        },
+        punchLeft: {
+          imageSrc: "src/assets/Krillin/punch/punchLeft.png",
+          scale: 1.28,
+          framesMax: 4,
+          image: new Image(),
+          framesHold: 15,
+        },
+        kickRight: {
+          imageSrc: "src/assets/Krillin/kick/kickRight.png",
+          scale: 1.28,
+          framesMax: 7,
+          image: new Image(),
+          framesHold: 9,
+        },
+        kickLeft: {
+          imageSrc: "src/assets/Krillin/kick/kickLeft.png",
+          scale: 1.28,
+          framesMax: 7,
+          image: new Image(),
+          framesHold: 9,
+        },
+        dashRight: {
+          imageSrc: "src/assets/Krillin/dash/dashRight.png",
+          scale: 1.28,
+          framesMax: 5,
+          image: new Image(),
+          framesHold: 9,
+        },
+        dashLeft: {
+          imageSrc: "src/assets/Krillin/dash/dashLeft.png",
+          scale: 1.28,
+          framesMax: 5,
+          image: new Image(),
+          framesHold: 1,
+        }
+      },
     this.attackBox = {
       position: {
         x: this.position.x,
@@ -34,8 +135,8 @@ export default class Krillin extends Sprite {
       width: 65,
       height: 25,
     };
-    this.canDash = obj.canDash;
-    this.canJump = obj.canJump;
+    this.canDash = "true";
+    this.canJump = "true";
     //this for loop resets the sprite to the new object/hash
     for (const sprite in this.sprites) {
       this.sprites[sprite].image = new Image();

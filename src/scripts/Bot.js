@@ -13,7 +13,10 @@ export default class Bot extends Sprite {
     this.canvasW = obj.canvasWidth;
     this.canvasH = obj.canvasHeight;
     this.canvas = obj.canvas;
-    this.position = obj.position;
+    this.position = {
+        x: 800,
+        y: 400,
+      };
     this.velocity = obj.velocity;
     this.width = 50;
     this.height = 65;
@@ -27,6 +30,60 @@ export default class Bot extends Sprite {
     this.sprites = obj.sprites;
     this.offset = obj.offset;
     this.gravity = obj.gravity;
+    this.changeMove = true;
+    this.currentAction = "idleLeft";
+    this.jumpCount = 0;
+    this.canJump = "true";
+    this.canDash = "true";
+    this.imageSrc = "src/assets/kakashi/idleLeft.png",
+    this.sprites = {
+      idleRight: {
+        imageSrc: "src/assets/Kakashi/idleRight.png",
+        //   scale: 0.75,
+        framesMax: 4,
+      },
+      idleLeft: {
+        imageSrc: "src/assets/kakashi/idleLeft.png",
+        // scale: 0.75,
+        framesMax: 4,
+      },
+      runRight: {
+        imageSrc: "src/assets/kakashi/runRight.png",
+        // scale: 0.75,
+        framesMax: 6,
+        // image: new Image()
+      },
+      runLeft: {
+        imageSrc: "src/assets/kakashi/runLeft.png",
+        // scale: 0.75,
+        framesMax: 6,
+        // image: new Image()
+      },
+      jump: {
+        imageSrc: "src/assets/kakashi/jumpRight.png",
+        // scale: 0.75,
+        framesMax: 2,
+        // image: new Image()
+      },
+      drop: {
+        imageSrc: "src/assets/kakashi/dropRight.png",
+        // scale: 0.75,
+        framesMax: 2,
+        // image: new Image()
+      },
+      jumpLeft: {
+        imageSrc: "src/assets/kakashi/jumpLeft.png",
+        // scale: 0.75,
+        framesMax: 2,
+        // image: new Image()
+      },
+      dropLeft: {
+        imageSrc: "src/assets/kakashi/dropLeft.png",
+        // scale: 0.75,
+        framesMax: 2,
+        // image: new Image()
+      },
+    },
     this.attackBox = {
       position: {
         x: this.position.x,
@@ -56,10 +113,7 @@ export default class Bot extends Sprite {
   update() {
     this.draw();
     this.drawHealthBar();
-    // this.animateAiMovement();
-
-    // this.drawHealthBarBorder();
-
+    this.animateAiMovement();
     this.animateFrames();
     //sets the position of the attack box to the characters position
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
@@ -81,33 +135,53 @@ export default class Bot extends Sprite {
       this.velocity.y += this.gravity;
     }
   }
-  // when invoked attacking is character/bots isAttacking value set to true for 100ms then changed back to false
-  // attack() {
-  //   if (this.image === this.sprites.idleRight.image) {
-  //     this.playerSwitchSprite("punchRight");
-  //   } else if (this.image === this.sprites.idleLeft.image) {
-  //     this.playerSwitchSprite("punchLeft");
-  //   }
-  //   this.isAttacking = true;
-  // }
   animateAiMovement() { 
-    let speed = 2;
-    let direction = -1;
+    const possibleMoves = ["runRight", "runLeft", "jump", "jump"];
+    if (this.changeMove) {
+      let randomMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+      switch (randomMove) {
+        case "runRight":
+          this.velocity.x = 3;
+          this.enemySwitchSprite("runRight");
+          this.currentAction = "runRight";
+          this.changeMove = false;
+          break;
 
-    // this.position.x += speed * direction;d
-    // if ( this.position.x + 10 >= this.canvasW || this.position.x <= 10) {
-    //   direction *= -1
-    // } 
-    if (this.position.x >= this.canvasW) {
-      this.position.x = this.canvasW;
-      this.velocity.x = 0;
-    } else {
-      this.position.x += speed * direction;
-      if (this.position.x <= 10) {
-        direction *= -1;
+        case "runLeft":
+          this.velocity.x = -3;
+          this.enemySwitchSprite("runLeft");
+          this.currentAction = "runLeft";
+          this.changeMove = false;
+          break;
+
+        case "jump":
+        if (this.canJump === "true" && this.jumpCount <= 3) {
+          this.velocity.y = -14;
+          this.enemySwitchSprite("jump");
+          this.currentAction = "jump";
+          this.shouldPreformDifferentMove = false;
+          this.jumpCount++; // Increment the jump count
+          setTimeout(() => {
+            this.velocity.y = -13;
+          }, 3000);
+          setTimeout(() => {
+            this.velocity.y = -16;
+          }, 6000);
+        }
+        break;
       }
     }
-  };
+    if (
+      (this.currentAction === "runRight" && this.position.x + this.width >= this.canvasW) ||
+      (this.currentAction === "runLeft" && this.position.x <= 0) ||
+      (this.currentAction === "jump" && this.jumpCount == 3)
+    ) {
+      this.velocity.x = 0;
+      this.velocity.y = 0;
+      this.jumpCount = 0;
+      this.changeMove = true;
+    }
+  }
 
   enemySwitchSprite(sprites) {
     switch (sprites) {

@@ -59,58 +59,8 @@ export default class Game {
       canvasWidth: this.canvasWidth,
       canvasHeight: this.canvasHeight,
       imageSrc: "src/assets/kakashi/idleLeft.png",
-      sprites: {
-        idleRight: {
-          imageSrc: "src/assets/Kakashi/idleRight.png",
-          //   scale: 0.75,
-          framesMax: 4,
-        },
-        idleLeft: {
-          imageSrc: "src/assets/kakashi/idleLeft.png",
-          // scale: 0.75,
-          framesMax: 4,
-        },
-        runRight: {
-          imageSrc: "src/assets/kakashi/runRight.png",
-          // scale: 0.75,
-          framesMax: 6,
-          // image: new Image()
-        },
-        runLeft: {
-          imageSrc: "src/assets/kakashi/runLeft.png",
-          // scale: 0.75,
-          framesMax: 6,
-          // image: new Image()
-        },
-        jump: {
-          imageSrc: "src/assets/kakashi/jumpRight.png",
-          // scale: 0.75,
-          framesMax: 2,
-          // image: new Image()
-        },
-        drop: {
-          imageSrc: "src/assets/kakashi/dropRight.png",
-          // scale: 0.75,
-          framesMax: 2,
-          // image: new Image()
-        },
-        jumpLeft: {
-          imageSrc: "src/assets/kakashi/jumpLeft.png",
-          // scale: 0.75,
-          framesMax: 2,
-          // image: new Image()
-        },
-        dropLeft: {
-          imageSrc: "src/assets/kakashi/dropLeft.png",
-          // scale: 0.75,
-          framesMax: 2,
-          // image: new Image()
-        },
-      },
-      position: {
-        x: 800,
-        y: 400,
-      },
+      sprites: this.sprites,
+      position: this.position,
       velocity: {
         x: 0,
         y: 0,
@@ -128,6 +78,8 @@ export default class Game {
       gravity: this.gravity,
       frameHold: 10,
       health: 100,
+      canJump: this.canJump,
+      canDash: this.canDash,
     });
 
 
@@ -137,106 +89,6 @@ export default class Game {
       canvas: this.canvas,
       canvasWidth: this.canvasWidth,
       canvasHeight: this.canvasHeight,
-      sprites: {
-        idleRight: {
-          imageSrc: "src/assets/Krillin/idle/idleRight.png",
-          scale: 0.65,
-          framesMax: 4,
-          image: new Image(),
-          framesHold: 15,
-        },
-        idleLeft: {
-          imageSrc: "src/assets/Krillin/idle/idleLeft.png",
-          scale: 0.65,
-          framesMax: 4,
-          image: new Image(),
-          framesHold: 15,
-        },
-        runRight: {
-          imageSrc: "src/assets/Krillin/run/runRight.png",
-          scale: 0.65,
-          framesMax: 4,
-          image: new Image(),
-          framesHold: 15,
-        },
-        runLeft: {
-          imageSrc: "src/assets/Krillin/run/runLeft.png",
-          scale: 0.65,
-          framesMax: 4,
-          image: new Image(),
-          framesHold: 15,
-        },
-        jump: {
-          imageSrc: "src/assets/Krillin//jump/jump.png",
-          scale: 0.65,
-          framesMax: 4,
-          image: new Image(),
-          framesHold: 15,
-        },
-        drop: {
-          imageSrc: "src/assets/Krillin/jump/drop.png",
-          scale: 0.65,
-          framesMax: 2,
-          image: new Image(),
-          framesHold: 15,
-        },
-        jumpLeft: {
-          imageSrc: "src/assets/Krillin/jump/jumpLeft.png",
-          scale: 0.65,
-          framesMax: 2,
-          image: new Image(),
-          framesHold: 15,
-        },
-        dropLeft: {
-          imageSrc: "src/assets/Krillin/jump/dropLeft.png",
-          scale: 0.65,
-          framesMax: 2,
-          image: new Image(),
-          framesHold: 15,
-        },
-        punchRight: {
-          imageSrc: "src/assets/Krillin/punch/punchRight.png",
-          scale: 1.28,
-          framesMax: 4,
-          image: new Image(),
-          framesHold: 15,
-        },
-        punchLeft: {
-          imageSrc: "src/assets/Krillin/punch/punchLeft.png",
-          scale: 1.28,
-          framesMax: 4,
-          image: new Image(),
-          framesHold: 15,
-        },
-        kickRight: {
-          imageSrc: "src/assets/Krillin/kick/kickRight.png",
-          scale: 1.28,
-          framesMax: 7,
-          image: new Image(),
-          framesHold: 9,
-        },
-        kickLeft: {
-          imageSrc: "src/assets/Krillin/kick/kickLeft.png",
-          scale: 1.28,
-          framesMax: 7,
-          image: new Image(),
-          framesHold: 9,
-        },
-        dashRight: {
-          imageSrc: "src/assets/Krillin/dash/dashRight.png",
-          scale: 1.28,
-          framesMax: 5,
-          image: new Image(),
-          framesHold: 9,
-        },
-        dashLeft: {
-          imageSrc: "src/assets/Krillin/dash/dashLeft.png",
-          scale: 1.28,
-          framesMax: 5,
-          image: new Image(),
-          framesHold: 1,
-        },
-      },
       position: {
         x: 200,
         y: 400,
@@ -250,7 +102,8 @@ export default class Game {
         y: -21,
       },
       imageSrc: "src/assets/Krillin/idle/idleRight.png",
-      scale: 0.65,
+      sprites: this.sprites,
+      scale: this.scaled,
       framesMax: 4,
       attackOffset: {
         x: 0,
@@ -258,8 +111,8 @@ export default class Game {
       },
       gravity: this.gravity,
       frameHold: 10,
-      canDash: "true",
-      canJump: "true",
+      canDash: this.canDash,
+      canJump: this.canJump,
 
     });
 
@@ -346,8 +199,7 @@ export default class Game {
   animatePlayer() {
     this.player.update();
     this.player.velocity.x = 0;
-    //changes sprites and velocity for left and right movement
-    if (this.keys.a.pressed && this.player.lastKey === ("a" || "A")) {
+    if (this.keys.a.pressed && this.player.lastKey === ("a" || "A")) { // for left and right movement
       this.player.playerSwitchSprite("runLeft");
       this.player.velocity.x = -7;
     } else if (this.keys.d.pressed && this.player.lastKey === ("d" || "D")) {
@@ -357,6 +209,15 @@ export default class Game {
       this.player.playerSwitchSprite("idleRight");
     } else if (this.player.lastKey === ("a" || "A") && this.player.velocity.x === 0) {
       this.player.playerSwitchSprite("idleLeft");
+    } else if (this.player.velocity.y < 0 && this.player.lastKey === ("a" || "A")) { //for jumping and dropping
+      this.player.playerSwitchSprite("jumpLeft");
+    } else if (this.player.velocity.y > 0 && this.player.lastKey === ("a" || "A")) {
+      this.player.playerSwitchSprite("dropLeft");
+    }
+    if (this.player.velocity.y < 0 && this.player.lastKey === ("d" || "D")) {
+      this.player.playerSwitchSprite("jump");
+    } else if (this.player.velocity.y > 0 && this.player.lastKey === ("d" || "D")) {
+      this.player.playerSwitchSprite("drop");
     }
 
     //colission for player and borders
@@ -368,80 +229,64 @@ export default class Game {
     };
     
 
-    // changes sprites for jumping
-    if (this.player.velocity.y < 0 && this.player.lastKey === ("a" || "A")) {
-      this.player.playerSwitchSprite("jumpLeft");
-    } else if (this.player.velocity.y > 0 && this.player.lastKey === ("a" || "A")) {
-      this.player.playerSwitchSprite("dropLeft");
-    }
-    if (this.player.velocity.y < 0 && this.player.lastKey === ("d" || "D")) {
-      this.player.playerSwitchSprite("jump");
-    } else if (this.player.velocity.y > 0 && this.player.lastKey === ("d" || "D")) {
-      this.player.playerSwitchSprite("drop");
-    }
     // if  collision/touching is true and is attacking is true
     // the if statement resets the player attacking to false,removes 10 from health
     // and takes away a health width % of the enimmy health id in scss
     if (this.collisionBox() && this.player.isAttacking) {
       this.player.isAttacking = false;
       this.enemy.health -= 3;
-      // document.querySelector('#enemyHealth').style.width = this.enemy.health + '%'
-      // console.log('player attack successful');
     }
     window.requestAnimationFrame(this.animatePlayer.bind(this));
   }
 
   animateBot() {
     this.enemy.update();
-    this.enemy.velocity.x = 0;
-    //changes sprites and velocity for left and right movement
-    if (this.keys.ArrowLeft.pressed && this.enemy.lastKey === "ArrowLeft") {
-      this.enemy.enemySwitchSprite("runLeft");
-      this.enemy.velocity.x = -2;
-    } else if (
-      this.keys.ArrowRight.pressed &&
-      this.enemy.lastKey === "ArrowRight"
-    ) {
-      this.enemy.enemySwitchSprite("runRight");
-      this.enemy.velocity.x = 2;
-    } else if (
-      this.enemy.lastKey === "ArrowRight" &&
-      this.enemy.velocity.x === 0
-    ) {
-      this.enemy.enemySwitchSprite("idleRight");
-    } else if (
-      this.enemy.lastKey === "ArrowLeft" &&
-      this.enemy.velocity.x === 0
-    ) {
-      this.enemy.enemySwitchSprite("idleLeft");
-    }
-    // changes sprites for jumping
-    if (this.enemy.velocity.y < 0 && this.enemy.lastKey === "ArrowLeft") {
-      this.enemy.enemySwitchSprite("jumpLeft");
-    } else if (
-      this.enemy.velocity.y > 0 &&
-      this.enemy.lastKey === "ArrowLeft"
-    ) {
-      this.enemy.enemySwitchSprite("dropLeft");
-    }
-    if (this.enemy.velocity.y < 0 && this.enemy.lastKey === "ArrowRight") {
-      this.enemy.enemySwitchSprite("jump");
-    } else if (
-      this.enemy.velocity.y > 0 &&
-      this.enemy.lastKey === "ArrowRight"
-    ) {
-      this.enemy.enemySwitchSprite("drop");
-    }
-    //colission for bot and borders
-    if (this.enemy.position.x <= 0 && this.keys.a.pressed) {
-      this.enemy.velocity.x = 0;
-    }
-    if (
-      this.enemy.position.x + this.enemy.width >= this.canvasWidth &&
-      this.keys.d.pressed
-    ) {
-      this.enemy.velocity.x = 0;
-    }
+    // this.enemy.velocity.x = 0;
+    // if (this.keys.ArrowLeft.pressed && this.enemy.lastKey === "ArrowLeft") { //left and right movement
+    //   this.enemy.enemySwitchSprite("runLeft");
+    //   this.enemy.velocity.x = -2;
+    // } else if (
+    //   this.keys.ArrowRight.pressed &&
+    //   this.enemy.lastKey === "ArrowRight"
+    // ) {
+    //   this.enemy.enemySwitchSprite("runRight");
+    //   this.enemy.velocity.x = 2;
+    // } else if (
+    //   this.enemy.lastKey === "ArrowRight" &&
+    //   this.enemy.velocity.x === 0
+    // ) {
+    //   this.enemy.enemySwitchSprite("idleRight");
+    // } else if (
+    //   this.enemy.lastKey === "ArrowLeft" &&
+    //   this.enemy.velocity.x === 0
+    // ) {
+    //   this.enemy.enemySwitchSprite("idleLeft");
+    // } else if (this.enemy.velocity.y < 0 && this.enemy.lastKey === "ArrowLeft") { //for jumping
+    //   this.enemy.enemySwitchSprite("jumpLeft");
+    // } else if (
+    //   this.enemy.velocity.y > 0 &&
+    //   this.enemy.lastKey === "ArrowLeft"
+    // ) {
+    //   this.enemy.enemySwitchSprite("dropLeft");
+    // }
+    // if (this.enemy.velocity.y < 0 && this.enemy.lastKey === "ArrowRight") {
+    //   this.enemy.enemySwitchSprite("jump");
+    // } else if (
+    //   this.enemy.velocity.y > 0 &&
+    //   this.enemy.lastKey === "ArrowRight"
+    // ) {
+    //   this.enemy.enemySwitchSprite("drop");
+    // }
+    // //colission for bot and borders
+    // if (this.enemy.position.x <= 0 && this.keys.a.pressed) {
+    //   this.enemy.velocity.x = 0;
+    // }
+    // if (
+    //   this.enemy.position.x + this.enemy.width >= this.canvasWidth &&
+    //   this.keys.d.pressed
+    // ) {
+    //   this.enemy.velocity.x = 0;
+    // }
 
     if (this.collisionBox() && this.enemy.isAttacking) {
       this.enemy.isAttacking = false;
@@ -456,54 +301,7 @@ export default class Game {
         canvasWidth: this.canvasWidth,
         canvasHeight: this.canvasHeight,
         imageSrc: "src/assets/kakashi/idleLeft.png",
-        sprites: {
-          idleRight: {
-            imageSrc: "src/assets/Kakashi/idleRight.png",
-            // scale: 0.75,
-            framesMax: 4,
-          },
-          idleLeft: {
-            imageSrc: "src/assets/kakashi/idleLeft.png",
-            // scale: 0.75,
-            framesMax: 4,
-          },
-          runRight: {
-            imageSrc: "src/assets/kakashi/runRight.png",
-            // scale: 0.75,
-            framesMax: 6,
-            // image: new Image()
-          },
-          runLeft: {
-            imageSrc: "src/assets/kakashi/runLeft.png",
-            // scale: 0.75,
-            framesMax: 6,
-            // image: new Image()
-          },
-          jump: {
-            imageSrc: "src/assets/kakashi/jumpRight.png",
-            // scale: 0.75,
-            framesMax: 2,
-            // image: new Image()
-          },
-          drop: {
-            imageSrc: "src/assets/kakashi/dropRight.png",
-            // scale: 0.75,
-            framesMax: 2,
-            // image: new Image()
-          },
-          jumpLeft: {
-            imageSrc: "src/assets/kakashi/jumpLeft.png",
-            // scale: 0.75,
-            framesMax: 2,
-            // image: new Image()
-          },
-          dropLeft: {
-            imageSrc: "src/assets/kakashi/dropLeft.png",
-            // scale: 0.75,
-            framesMax: 2,
-            // image: new Image()
-          },
-        },
+        sprites: this.sprites,
         position: {
           x: 800,
           y: 400,
