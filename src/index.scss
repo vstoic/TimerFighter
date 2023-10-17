@@ -6,22 +6,23 @@ html {
 }
 
 .title {
-  font-size: 28px;
+  font-size: 36px;
   display: flex;
   color: whitesmoke;
   font-family: 'Press Start 2P', cursive;
   font-weight: 100;
   align-items: center;
   justify-content: center;
-  margin-top: 4vh;
-  margin-bottom: 2vh;
+  margin-top: 3vh;
+  margin-bottom: 1vh;
 }
 .time-score {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: row;
-  margin-bottom: 1.5vh;
+  // margin-top: 1vh;
+  margin-bottom: 0.5vh;
 }
 .timer {
   // background-color: black;
@@ -101,7 +102,7 @@ html {
     font-family: 'Press Start 2P', cursive;
     width: fit-content;
     padding: 5px;
-    margin-top: 5px;
+    // margin-top: 1px;
   }
   .options {
     display: flex;
@@ -116,7 +117,6 @@ html {
       font-weight: bold;
       color: white;
       margin: 2px;
-      padding: 5px;
     }
   }
   .game-options {
@@ -136,6 +136,7 @@ html {
     font-weight: bold;
     color: #333;
     background-color: #ccc;
+
   }
 
   .game-options option:checked {
@@ -188,6 +189,7 @@ html {
   flex-direction: row;
   gap: 25px;
   margin-top: 1.5vh;
+  
 }
 
 .instructions {
@@ -205,7 +207,7 @@ html {
   .ptitle {
     color: gold;
     background-color: transparent;
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 #instruction {
@@ -213,6 +215,6 @@ html {
   color: whitesmoke;
   font-family: 'Press Start 2P', cursive;
   font-weight: 0;
-  line-height: 18px;
-  font-size: 10px;
+  line-height: 20px;
+  font-size: 16px;
 }
