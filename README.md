@@ -12,15 +12,18 @@ TimerFighter is an arcade fighting game where you take on bots in a race against
 - Players select a character, and timer
 - Instructions & a detailed character combo list
 <br/>
+
 ![Menu Image](./src/assets/Images/Menu.png)
 
 ### Timer & Score Display
 - A count down clock that stops the game
 <br/>
+
 ![Timer Image](./src/assets/Images/Timer_score.png)
 
 - End game screen with Score 
 <br/>
+
 ![End Menu Image](./src/assets/Images/End_screen.png)
 
 ### Fighter
@@ -33,7 +36,7 @@ TimerFighter is an arcade fighting game where you take on bots in a race against
 ### Music & sound (Howler.js)
 - Play and pause music
 - Sound Effects
-<br/>
+
 ![Sound Code](./src/assets/Images/Sound_code.png)
 
 
