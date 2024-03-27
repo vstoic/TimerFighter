@@ -50,8 +50,7 @@ export default class Sprite {
         this.c.fillRect(this.position.x, this.position.y - 20, barWidth, 7)
         this.c.fillStyle = 'yellow'; 
     }
-
-
+    
   // if the frames is less than the max frame then add one. 
   //if it is at max frames then loop back to the start.
   animateFrames() {

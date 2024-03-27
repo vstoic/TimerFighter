@@ -129,7 +129,6 @@ export default class Game {
       },
     });
 
-
     this.house = new Sprite({
       c: this.c,
       position: {
@@ -221,12 +220,16 @@ export default class Game {
     if (this.player.position.x + this.player.width >= this.canvasWidth && this.keys.d.pressed) {
         this.player.velocity.x = 0;
     };
-    // if  collision/touching is true and is attacking is true
-    // the if statement resets the player attacking to false,removes 10 from health
-    // and takes away a health width % of the enimmy health id in scss
-    if (this.collisionBox() && this.player.isAttacking) {
-      this.player.isAttacking = false;
+    
+    if (this.collisionBox() && this.player.isPunching) { //damage modifier
+      this.player.isPunching = false;
+      // add sound here
       this.enemy.health -= 3;
+    } else if (this.collisionBox() && this.player.isKicking) {
+      this.player.isKicking = false
+      //add sound here instead
+      this.enemy.health -= 10;
+      this.player.velocity.x = -20;
     }
     window.requestAnimationFrame(this.animatePlayer.bind(this));
   }

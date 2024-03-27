@@ -18,7 +18,8 @@ export default class Krillin extends Sprite {
     this.width = 50;
     this.height = 65;
     this.lastKey = "";
-    this.isAttacking;
+    this.isPunching;
+    this.isKicking;
     this.framesCurrent = 0;
     this.framesElapsed = 0;
     this.framesHold = 15;
@@ -171,7 +172,7 @@ export default class Krillin extends Sprite {
     } else if (this.image === this.sprites.idleLeft.image) {
       this.playerSwitchSprite("punchLeft");
     }
-    this.isAttacking = true;
+    this.isPunching = true;
   };
   kick() {
     if (this.image === this.sprites.idleRight.image) {
@@ -179,7 +180,7 @@ export default class Krillin extends Sprite {
     } else if (this.image === this.sprites.idleLeft.image) {
       this.playerSwitchSprite("kickLeft");
     }
-    this.isAttacking = true;
+    this.isKicking = true;
   };
   dash() {
     if (this.image === this.sprites.idleRight.image) {
@@ -248,7 +249,7 @@ export default class Krillin extends Sprite {
       this.framesCurrent < this.sprites.dashRight.framesMax - 1
     )
       return;
-
+      
     if (
       this.image === this.sprites.dashLeft.image &&
       this.framesCurrent < this.sprites.dashLeft.framesMax - 1
